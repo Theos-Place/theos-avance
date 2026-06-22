@@ -115,18 +115,30 @@
   .dot.op{background:var(--green)}
   .dot.run{background:var(--teal-deep)}
   .dot.rev{background:var(--amber)}
-  .dot.todo{background:#c2c1d0}
+  .dot.todo{background:var(--coral)}
 
-  .modgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(232px,1fr));gap:14px}
+  .modgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(248px,1fr));gap:14px}
   .mod{
     background:var(--paper-card);border:1px solid var(--line);border-radius:16px;
-    padding:18px 18px 16px;position:relative;
+    padding:18px;position:relative;
   }
-  .mod .barbg{height:6px;border-radius:99px;background:#eeedf4;overflow:hidden;margin-top:14px}
-  .mod .bar{height:100%;border-radius:99px}
-  .mod h3{font-size:15.5px;font-weight:600;color:var(--navy);display:flex;align-items:center;gap:8px}
-  .mod .state{font-size:12px;color:var(--muted);margin-top:3px}
-  .mod .pct{position:absolute;top:18px;right:18px;font-size:13px;font-weight:600;color:var(--muted)}
+  .mod .top{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+  .mod h3{font-size:15.5px;font-weight:600;color:var(--navy);line-height:1.25}
+  .mod .pill{
+    font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+    padding:5px 9px;border-radius:99px;white-space:nowrap;flex-shrink:0;margin-top:1px;
+  }
+  .mod .pill.op{background:rgba(63,174,122,.13);color:#2c8159}
+  .mod .pill.run{background:rgba(224,160,58,.16);color:#a9762a}
+  .mod .pill.todo{background:rgba(239,85,84,.12);color:var(--coral)}
+  .mod .imp{
+    display:inline-flex;align-items:center;gap:6px;margin-top:12px;
+    font-size:11.5px;color:var(--teal-deep);font-weight:600;
+  }
+  .mod .imp::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--teal)}
+  .mod .imp.todo-note{color:var(--coral)}
+  .mod .imp.todo-note::before{background:var(--coral)}
+  .mod .note{font-size:12px;color:var(--muted);margin-top:9px;line-height:1.4}
 
   /* ---------- COLUMNS: logrado / marcha / pendiente ---------- */
   .three{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
@@ -139,7 +151,7 @@
     display:inline-block;padding:5px 11px;border-radius:99px;margin-bottom:16px;
   }
   .col.done .ctag{background:rgba(63,174,122,.12);color:#2c8159}
-  .col.run .ctag{background:rgba(63,154,160,.14);color:var(--teal-deep)}
+  .col.run .ctag{background:rgba(224,160,58,.16);color:#a9762a}
   .col.todo .ctag{background:rgba(239,85,84,.12);color:var(--coral)}
   .col ul{list-style:none}
   .col li{
@@ -151,10 +163,27 @@
     content:"";position:absolute;left:0;top:15px;width:9px;height:9px;border-radius:50%;
   }
   .col.done li::before{background:var(--green)}
-  .col.run li::before{background:var(--teal-deep)}
+  .col.run li::before{background:var(--amber)}
   .col.todo li::before{background:var(--coral)}
   .col li b{font-weight:600;color:var(--navy)}
   .col li span{display:block;color:var(--muted);font-size:12.5px;margin-top:1px}
+
+  /* ---------- MEJORAS PLANEADAS (azul/teal) ---------- */
+  .plan{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .pcard{
+    background:linear-gradient(160deg, rgba(112,189,194,.14), rgba(112,189,194,.05));
+    border:1.5px solid rgba(112,189,194,.5);
+    border-radius:20px;padding:26px 24px;position:relative;
+  }
+  .pcard .ptag{
+    display:inline-flex;align-items:center;gap:7px;
+    font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;
+    color:var(--teal-deep);margin-bottom:14px;
+  }
+  .pcard .ptag::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--teal)}
+  .pcard h3{font-family:'Fraunces',serif;font-weight:600;font-size:20px;color:var(--navy);margin-bottom:9px;line-height:1.18}
+  .pcard p{font-size:13.5px;color:#46586a}
+  .pcard .scope{font-size:12px;color:var(--teal-deep);font-weight:600;margin-top:14px}
 
   /* ---------- HIGHLIGHTS ---------- */
   .highs{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
@@ -220,8 +249,8 @@
 
     <div class="band">
       <div class="stat"><div class="num teal">~23 000</div><div class="lbl">Miembros gestionados (Costa Rica)</div></div>
-      <div class="stat"><div class="num">6</div><div class="lbl">Módulos en operación</div></div>
-      <div class="stat"><div class="num coral">5</div><div class="lbl">Módulos por construir o integrar</div></div>
+      <div class="stat"><div class="num">6</div><div class="lbl">Módulos funcionales</div></div>
+      <div class="stat"><div class="num coral">2</div><div class="lbl">Módulos por construir desde cero</div></div>
     </div>
 
     <div class="date">Junio 2026</div>
@@ -240,28 +269,26 @@
     </div>
 
     <div class="legend">
-      <span><i class="dot op"></i> En operación</span>
-      <span><i class="dot run"></i> En implementación</span>
-      <span><i class="dot rev"></i> En revisión / QA</span>
-      <span><i class="dot todo"></i> Por construir</span>
+      <span><i class="dot op"></i> Funcional</span>
+      <span><i class="dot rev"></i> En desarrollo / por revisar</span>
+      <span><i class="dot todo"></i> Pendiente</span>
+      <span style="color:var(--teal-deep);font-weight:600"><i class="dot" style="background:var(--teal)"></i> Mejora planeada</span>
     </div>
 
     <div class="modgrid">
-      <div class="mod"><span class="pct">100%</span><h3>Miembros y detalle</h3><div class="state">En operación</div><div class="barbg"><div class="bar" style="width:100%;background:var(--green)"></div></div></div>
-      <div class="mod"><span class="pct">100%</span><h3>Eventos</h3><div class="state">En operación</div><div class="barbg"><div class="bar" style="width:100%;background:var(--green)"></div></div></div>
-      <div class="mod"><span class="pct">95%</span><h3>Estudios bíblicos</h3><div class="state">Operando · faltan excepciones de matrícula</div><div class="barbg"><div class="bar" style="width:95%;background:var(--green)"></div></div></div>
-      <div class="mod"><span class="pct">100%</span><h3>Dirigentes</h3><div class="state">En operación</div><div class="barbg"><div class="bar" style="width:100%;background:var(--green)"></div></div></div>
-      <div class="mod"><span class="pct">100%</span><h3>Servidores y comités</h3><div class="state">En operación</div><div class="barbg"><div class="bar" style="width:100%;background:var(--green)"></div></div></div>
-      <div class="mod"><span class="pct">100%</span><h3>Accesos y seguridad</h3><div class="state">En operación</div><div class="barbg"><div class="bar" style="width:100%;background:var(--green)"></div></div></div>
-      <div class="mod"><span class="pct">85%</span><h3>Comunicaciones · correo</h3><div class="state">SES listo · falta darse de baja por usuario</div><div class="barbg"><div class="bar" style="width:85%;background:var(--teal-deep)"></div></div></div>
-      <div class="mod"><span class="pct">15%</span><h3>Pagos en línea</h3><div class="state">Creando cuentas PayPal y Tilopay (~50%)</div><div class="barbg"><div class="bar" style="width:15%;background:var(--teal-deep)"></div></div></div>
-      <div class="mod"><span class="pct">35%</span><h3>Reportería</h3><div class="state">Primer reporte listo · resto en curso</div><div class="barbg"><div class="bar" style="width:35%;background:var(--teal-deep)"></div></div></div>
-      <div class="mod"><span class="pct">40%</span><h3>Formularios</h3><div class="state">Por revisar a fondo</div><div class="barbg"><div class="bar" style="width:40%;background:var(--amber)"></div></div></div>
-      <div class="mod"><span class="pct">—</span><h3>Datos internacionales</h3><div class="state">Migrar Madrid y sedes fuera de CR</div><div class="barbg"><div class="bar" style="width:8%;background:var(--amber)"></div></div></div>
-      <div class="mod"><span class="pct">0%</span><h3>Finanzas</h3><div class="state">Por construir</div><div class="barbg"><div class="bar" style="width:4%;background:#c2c1d0"></div></div></div>
-      <div class="mod"><span class="pct">0%</span><h3>Empleados</h3><div class="state">Por construir</div><div class="barbg"><div class="bar" style="width:4%;background:#c2c1d0"></div></div></div>
-      <div class="mod"><span class="pct">0%</span><h3>WhatsApp / Meta</h3><div class="state">Integración pendiente</div><div class="barbg"><div class="bar" style="width:4%;background:#c2c1d0"></div></div></div>
-      <div class="mod"><span class="pct">30%</span><h3>Pase en Wallets</h3><div class="state">QR listo · billeteras a futuro</div><div class="barbg"><div class="bar" style="width:30%;background:#c2c1d0"></div></div></div>
+      <div class="mod"><div class="top"><h3>Miembros y detalle</h3><span class="pill op">Funcional</span></div><div class="imp">Mejora planeada: pase en wallets</div></div>
+      <div class="mod"><div class="top"><h3>Eventos</h3><span class="pill op">Funcional</span></div><div class="imp">Mejora planeada: pase en wallets</div></div>
+      <div class="mod"><div class="top"><h3>Estudios bíblicos</h3><span class="pill op">Funcional</span></div><div class="imp todo-note">Pendiente: excepciones de matrícula</div></div>
+      <div class="mod"><div class="top"><h3>Dirigentes</h3><span class="pill op">Funcional</span></div></div>
+      <div class="mod"><div class="top"><h3>Servidores y comités</h3><span class="pill op">Funcional</span></div></div>
+      <div class="mod"><div class="top"><h3>Accesos y seguridad</h3><span class="pill op">Funcional</span></div></div>
+      <div class="mod"><div class="top"><h3>Comunicaciones</h3><span class="pill run">En desarrollo</span></div><div class="note">Correo (SES) con plantillas y baja por usuario.</div></div>
+      <div class="mod"><div class="top"><h3>Pagos en línea</h3><span class="pill run">En desarrollo</span></div><div class="note">Creando cuentas de PayPal y Tilopay.</div></div>
+      <div class="mod"><div class="top"><h3>Reportería</h3><span class="pill todo">Pendiente</span></div><div class="note">Reporte de prueba listo; falta la mayor parte.</div></div>
+      <div class="mod"><div class="top"><h3>Formularios</h3><span class="pill run">En desarrollo</span></div><div class="note">Existe; en revisión y validación.</div></div>
+      <div class="mod"><div class="top"><h3>Datos internacionales</h3><span class="pill todo">Pendiente</span></div><div class="note">Migrar Madrid y sedes fuera de CR.</div></div>
+      <div class="mod"><div class="top"><h3>Finanzas</h3><span class="pill todo">Pendiente</span></div></div>
+      <div class="mod"><div class="top"><h3>Empleados</h3><span class="pill todo">Pendiente</span></div></div>
     </div>
   </div>
 </section>
@@ -279,36 +306,34 @@
 
     <div class="three">
       <div class="col done">
-        <span class="ctag">Ya funcionando</span>
+        <span class="ctag">Funcional</span>
         <ul>
-          <li><b>Miembros y detalle</b><span>~23 000 perfiles completos, búsqueda avanzada, sede automática por asistencia, pase digital con QR.</span></li>
+          <li><b>Miembros y detalle</b><span>~23 000 perfiles, búsqueda avanzada, sede automática por asistencia, pase digital con QR.</span></li>
           <li><b>Eventos</b><span>Calendario, eventos recurrentes, check-in por QR desde el celular, inscripciones, subeventos y validaciones.</span></li>
-          <li><b>Estudios bíblicos</b><span>Solicitudes, matrícula, grupos, cierre con notas e invitaciones. Operando; las excepciones de matrícula están en pruebas.</span></li>
-          <li><b>Dirigentes</b><span>Formación, disponibilidad, asignaciones, estados automáticos y acciones masivas. Módulo completo.</span></li>
-          <li><b>Servidores y comités</b><span>Puestos con aplicación en línea, comités y áreas, asignaciones. Módulo completo.</span></li>
+          <li><b>Estudios bíblicos</b><span>Solicitudes, matrícula, grupos, cierre con notas e invitaciones.</span></li>
+          <li><b>Dirigentes</b><span>Formación, disponibilidad, asignaciones, estados automáticos y acciones masivas.</span></li>
+          <li><b>Servidores y comités</b><span>Puestos con aplicación en línea, comités y áreas, asignaciones.</span></li>
           <li><b>Accesos y seguridad</b><span>Permisos por rol y autenticación reforzada.</span></li>
-          <li><b>Reportería propia</b><span>Ya funcionando: se hizo un reporte de prueba (asistencia por sede) para validar la propuesta de migrar los reportes de Power BI al sistema.</span></li>
           <li><b>Datos históricos de Costa Rica</b><span>Años de asistencia, estudios y donaciones integrados y unificados por sede.</span></li>
         </ul>
       </div>
 
       <div class="col run">
-        <span class="ctag">En marcha ahora</span>
+        <span class="ctag">En desarrollo</span>
         <ul>
           <li><b>Plantillas de correo</b><span>Creación de las plantillas básicas de email con la configuración correspondiente de Amazon SES, listas para los envíos del sistema.</span></li>
           <li><b>Darse de baja por usuario</b><span>Que cada persona pueda salirse de los correos masivos, para cumplir los requisitos de envíos masivos y cuidar la reputación de envío.</span></li>
-          <li><b>Pagos en línea</b><span>Creación de las cuentas de PayPal y Tilopay (~50%). La integración con el sistema viene después.</span></li>
+          <li><b>Pagos en línea</b><span>Creación de las cuentas de PayPal y Tilopay. La integración con el sistema viene después.</span></li>
+          <li><b>Formularios</b><span>El módulo existe; está en revisión y validación para dejarlo listo para uso real.</span></li>
         </ul>
       </div>
 
       <div class="col todo">
         <span class="ctag">Por delante</span>
         <ul>
-          <li><b>Revisión de Formularios</b><span>Existe; falta validarlo a fondo.</span></li>
+          <li><b>Excepciones de matrícula</b><span>Permisos especiales para inscribir en estudios sin cumplir todos los requisitos, con registro de quién autoriza.</span></li>
+          <li><b>Reportería completa</b><span>Se hizo un reporte de prueba (asistencia por sede) para validar la propuesta de migrar de Power BI; falta construir la suite de reportes con propósito ejecutivo.</span></li>
           <li><b>Migrar datos internacionales</b><span>La carga actual fue solo Costa Rica; falta Madrid y las demás sedes fuera del país.</span></li>
-          <li><b>Apple / Google Wallet</b><span>Guardar el pase digital en el teléfono.</span></li>
-          <li><b>WhatsApp / Meta</b><span>Envíos desde el sistema con plantillas aprobadas.</span></li>
-          <li><b>Suite de 7 reportes</b><span>Replicar las páginas restantes con propósito ejecutivo.</span></li>
           <li><b>Módulo de Empleados</b><span>Gestión del personal; alcance a definir con dirección.</span></li>
           <li><b>Módulo de Finanzas</b><span>Pagos, donaciones, becas y devoluciones. Conecta con eventos y con donantes.</span></li>
         </ul>
@@ -323,63 +348,23 @@
     <div class="sec-head">
       <div class="tick">03</div>
       <div>
-        <h2>Avances que mueven la aguja</h2>
-        <p>Dos cambios de este período que simplifican la experiencia y reducen dependencias externas.</p>
+        <h2>Mejoras planeadas</h2>
+        <p>Funcionalidades pensadas para el futuro sobre módulos que ya están operando. No son pendientes por construir, sino el siguiente nivel de lo que ya funciona.</p>
       </div>
     </div>
 
-    <div class="highs">
-      <div class="high">
-        <div class="k">Inscripciones</div>
-        <h3>Inscribirse con un clic, sin llenar formularios</h3>
-        <p>Muchas inscripciones pasarán a hacerse con un solo botón directo en el sistema, en lugar del proceso actual de llenar formularios. Menos fricción para la persona y menos trabajo manual de registro.</p>
-        <span class="chip">Más simple para el miembro</span>
+    <div class="plan" style="grid-template-columns:repeat(2,1fr)">
+      <div class="pcard">
+        <div class="ptag">A futuro</div>
+        <h3>Pase en wallets</h3>
+        <p>Guardar el pase digital directamente en Apple Wallet y Google Wallet del teléfono. El código QR ya funciona; esto suma la integración con las billeteras.</p>
+        <div class="scope">Módulos: Miembros + Eventos</div>
       </div>
-      <div class="high">
-        <div class="k">Reportería</div>
-        <h3>Reportes propios, en vivo, sin licencias</h3>
-        <p>Empezamos a reemplazar Power BI —que dependía de actualizar un Excel a mano— por reportes dentro del sistema con datos al instante y la identidad de Theos. El primer reporte ya está validado.</p>
-        <span class="chip">Sin costo de licencias por usuario</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- QA / PRUEBAS -->
-<section class="block" style="background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
-  <div class="wrap">
-    <div class="sec-head">
-      <div class="tick">04</div>
-      <div>
-        <h2>Calidad y pruebas en curso</h2>
-        <p>Antes de dar por cerrados los módulos, estamos verificando que todo funcione como se espera en uso real.</p>
-      </div>
-    </div>
-
-    <div class="qa">
-      <div class="qa-item">
-        <div class="qn">A</div>
-        <div>
-          <h4>Excepciones de matrícula</h4>
-          <p>Permisos especiales: que un coordinador pueda autorizar a una persona a inscribirse en un estudio aunque no cumpla todos los requisitos, de forma controlada y con registro de quién lo autorizó.</p>
-        </div>
-        <span class="badge">En proceso</span>
-      </div>
-      <div class="qa-item">
-        <div class="qn">B</div>
-        <div>
-          <h4>Validaciones de filtros</h4>
-          <p>Asegurar que los filtros de búsqueda (asistencia, sede, estudios, fechas) devuelvan resultados correctos al combinarse y no presenten errores.</p>
-        </div>
-        <span class="badge">En proceso</span>
-      </div>
-      <div class="qa-item">
-        <div class="qn">C</div>
-        <div>
-          <h4>Creación de formularios</h4>
-          <p>Revisar y validar el módulo de formularios para dejarlo listo para uso real.</p>
-        </div>
-        <span class="badge">En proceso</span>
+      <div class="pcard">
+        <div class="ptag">A futuro</div>
+        <h3>WhatsApp / Meta</h3>
+        <p>Enviar mensajes desde el sistema por WhatsApp con plantillas aprobadas, como complemento al correo. Parte de la evolución del módulo de comunicaciones.</p>
+        <div class="scope">Módulo: Comunicaciones</div>
       </div>
     </div>
   </div>
@@ -389,7 +374,7 @@
 <section class="block">
   <div class="wrap">
     <div class="sec-head">
-      <div class="tick">05</div>
+      <div class="tick">04</div>
       <div>
         <h2>Alineado a los 3 objetivos del año</h2>
         <p>La reportería ejecutiva que viene se organiza alrededor de las metas de la organización.</p>
@@ -408,7 +393,7 @@
   <div class="wrap">
     <div class="closing">
       <div class="k">En resumen</div>
-      <p>Los módulos centrales de Theos ya están completos y operando: miembros, eventos, estudios, dirigentes y servidores. Este período cerró la base de las comunicaciones por correo y arrancó los pagos en línea y la reportería propia. Quedan por construir Finanzas y Empleados, migrar las sedes internacionales (Madrid y fuera de CR), revisar Formularios y completar WhatsApp y billeteras — el camino para cubrir el 100% de la operación.</p>
+      <p>Los módulos centrales de Theos ya son funcionales y están en uso: miembros, eventos, estudios, dirigentes y servidores. En desarrollo están las comunicaciones (correo y WhatsApp), los pagos en línea y la reportería. Quedan por construir desde cero Finanzas y Empleados, migrar las sedes internacionales, revisar Formularios y sumar el pase en billeteras.</p>
     </div>
   </div>
 </section>
