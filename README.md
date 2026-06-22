@@ -1,37 +1,38 @@
-# Plataformas Tecnológicas — Theos Place
+# Theos Place — Avance del Sistema Administrativo
 
-Inventario visual de las herramientas y servicios digitales del Departamento de TI de la Asociación Theos Place. Es una página estática (`index.html`) que lista cada plataforma con su descripción, cuenta asociada, estado y costo.
+Reporte visual del estado del sistema administrativo de Theos Place,
+pensado para presentar a dirección. Muestra el avance por módulo, lo
+que está en operación, lo que está en marcha y lo que queda por
+construir.
 
-## Qué hace
+## Ver el reporte
 
-- Muestra las plataformas agrupadas por categoría: Web/Infraestructura/Datos, Diseño & Código, Automatización, Marketing, IA y Pagos.
-- Resume el total de plataformas, el promedio mensual y la estimación anual de costos.
-- Permite filtrar las plataformas por categoría.
+Es una página HTML estática (un solo archivo, sin dependencias).
 
-## Cómo abrirlo
-
-No necesita build ni dependencias. Abrí el archivo directamente:
-
-```bash
-open index.html
-```
-
-O serví la carpeta con cualquier servidor estático si lo preferís:
-
-```bash
-python3 -m http.server 8000
-# luego abrí http://localhost:8000
-```
+- **En línea:** https://theos-avance.vercel.app/
+- **Local:** abrir `index.html` en cualquier navegador
+- **Como PDF:** abrir en el navegador → Imprimir → Guardar como PDF
+  (incluye estilos de impresión para que los colores y secciones se
+  vean bien)
 
 ## Estructura
 
-- `index.html` — todo el contenido, estilos y scripts en un solo archivo.
+- `index.html` — el reporte completo (estilos incluidos en el mismo archivo)
 
-## Cómo actualizar el inventario
+## Actualizar
 
-Editá `index.html` directamente. Cada plataforma es una fila dentro de la tabla de su sección. Cuando agregués, quités o cambiés el costo de una plataforma, acordate de actualizar también los totales del encabezado (cantidad de plataformas, promedio mensual y estimado anual).
+El contenido (estado de módulos, porcentajes, pendientes) está escrito
+directamente en `index.html`. Para actualizarlo, editar el HTML y
+volver a desplegar.
 
-## Notas
+## Contenido
 
-- La fecha del inventario está en el encabezado (actualmente: Junio 2026).
-- Los íconos y fuentes (DM Mono) se cargan desde Google Fonts, así que requiere conexión a internet para verse exactamente como fue diseñado.
+- Estado por módulo con barra de progreso
+- Lo logrado / en marcha / por delante
+- Avances destacados del período
+- Calidad y pruebas en curso
+- Alineación con los 3 objetivos del año
+
+---
+
+Theos Place · Junio 2026

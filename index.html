@@ -1,731 +1,421 @@
 <!DOCTYPE html>
-
-<html lang="es">
+<html lang="es-CR">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Plataformas Tecnológicas — Theos Place</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Theos Place · Avance del Sistema Administrativo</title>
 <style>
-:root {
-  --brand-navy-deep:  #161440;
-  --brand-navy:       #29365C;
-  --brand-coral:      #EF5554;
-  --brand-coral-deep: #D94241;
-  --brand-coral-soft: #F78382;
-  --brand-teal:       #70BDC2;
-  --brand-teal-deep:  #519DA2;
-  --brand-teal-soft:  #B5DDE0;
-  --neutral-50:       #FAFAFC;
-  --neutral-100:      #F1F2F6;
-  --neutral-200:      #E4E6EE;
-  --neutral-300:      #C9CCD9;
-  --neutral-400:      #9CA0B4;
-  --neutral-500:      #6E7290;
-  --neutral-600:      #4E5274;
-  --outline:          rgba(22,20,64,0.10);
-  --shadow:           0 2px 12px rgba(22,20,64,0.07);
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap');
 
-  --font-display: 'Axis','Avenir Next','Nunito Sans',system-ui,sans-serif;
-  --font-body:    'Gilmer','Axis',system-ui,sans-serif;
-  --font-mono:    'DM Mono',ui-monospace,monospace;
-}
+  :root{
+    --navy:#161440;
+    --navy-soft:#272463;
+    --coral:#EF5554;
+    --teal:#70BDC2;
+    --teal-deep:#3f9aa0;
+    --paper:#F6F5F2;
+    --paper-card:#FFFFFF;
+    --ink:#1b1a2e;
+    --muted:#6c6b82;
+    --line:#e7e6ef;
+    --green:#3fae7a;
+    --amber:#e0a03a;
+  }
 
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  *{box-sizing:border-box;margin:0;padding:0}
 
-body {
-  font-family: var(--font-body),'Inter',system-ui,sans-serif;
-  font-weight: 300;
-  background: var(--neutral-50);
-  color: var(--brand-navy);
-  -webkit-font-smoothing: antialiased;
-  min-height: 100vh;
-}
+  html{scroll-behavior:smooth}
 
-/* ── HERO ─────────────────────────────────────────────── */
-.hero {
-  background: var(--brand-navy-deep);
-  padding: 44px 48px 36px;
-  position: relative;
-  overflow: hidden;
-}
-.hero-theta {
-  position: absolute;
-  right: 5%; top: 50%;
-  transform: translateY(-50%);
-  width: 180px; height: 180px;
-  color: var(--brand-teal);
-  opacity: 0.10;
-  pointer-events: none;
-}
-.hero-inner {
-  position: relative; z-index: 2;
-  max-width: 1100px; margin: 0 auto;
-  display: flex; align-items: flex-end;
-  justify-content: space-between; gap: 28px; flex-wrap: wrap;
-}
-.hero-eyebrow {
-  font-family: var(--font-display),'Inter',sans-serif;
-  font-weight: 800; font-size: 11px;
-  text-transform: uppercase; letter-spacing: 0.14em;
-  color: var(--brand-teal); display: block; margin-bottom: 8px;
-}
-.hero-title {
-  font-family: var(--font-display),'Inter',sans-serif;
-  font-weight: 800; font-size: 38px; line-height: 1;
-  letter-spacing: -0.02em; color: #fff;
-}
-.hero-title span { color: var(--brand-coral); }
-.hero-sub { font-size: 13px; color: rgba(255,255,255,0.5); margin-top: 8px; }
+  body{
+    font-family:'Inter',system-ui,sans-serif;
+    background:var(--paper);
+    color:var(--ink);
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
 
-.hero-pills { display: flex; gap: 12px; flex-wrap: wrap; align-items: flex-end; }
-.hero-pill {
-  background: rgba(255,255,255,0.07);
-  border: 1px solid rgba(255,255,255,0.12);
-  border-radius: 14px;
-  padding: 14px 20px; text-align: center; min-width: 100px;
-}
-.hero-pill .val {
-  font-family: var(--font-display),'Inter',sans-serif;
-  font-weight: 800; font-size: 24px; color: #fff; display: block; line-height: 1;
-}
-.hero-pill.coral .val { color: var(--brand-coral); }
-.hero-pill.teal  .val { color: var(--brand-teal); }
-.hero-pill .lbl {
-  font-size: 10px; color: rgba(255,255,255,0.4);
-  text-transform: uppercase; letter-spacing: 0.08em;
-  margin-top: 4px; display: block;
-}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 28px}
 
-/* ── FILTERS ──────────────────────────────────────────── */
-.filters-bar {
-  background: #fff;
-  border-bottom: 1px solid var(--outline);
-  padding: 12px 48px;
-  display: flex; gap: 8px; flex-wrap: wrap; align-items: center;
-  position: sticky; top: 0; z-index: 20;
-}
-.filters-lbl {
-  font-family: var(--font-display),'Inter',sans-serif;
-  font-weight: 800; font-size: 10px;
-  text-transform: uppercase; letter-spacing: 0.14em;
-  color: var(--neutral-400); margin-right: 4px;
-}
-.filter-btn {
-  font-family: var(--font-display),'Inter',sans-serif;
-  font-weight: 800; font-size: 11px;
-  padding: 6px 14px; border-radius: 999px;
-  border: 1.5px solid var(--outline);
-  background: transparent; color: var(--neutral-500);
-  cursor: pointer; transition: all 150ms;
-}
-.filter-btn:hover { background: var(--neutral-100); color: var(--brand-navy); border-color: var(--neutral-300); }
-.filter-btn.active { background: var(--brand-navy-deep); border-color: var(--brand-navy-deep); color: #fff; }
+  /* ---------- HERO ---------- */
+  .hero{
+    background:
+      radial-gradient(120% 130% at 88% -10%, rgba(112,189,194,.30) 0%, rgba(112,189,194,0) 46%),
+      radial-gradient(110% 120% at 8% 120%, rgba(239,85,84,.22) 0%, rgba(239,85,84,0) 50%),
+      var(--navy);
+    color:#fff;
+    padding:72px 0 60px;
+    position:relative;
+    overflow:hidden;
+  }
+  .hero .eyebrow{
+    font-size:12px;letter-spacing:.32em;text-transform:uppercase;
+    color:var(--teal);font-weight:600;margin-bottom:22px;
+  }
+  .logo{
+    font-family:'Fraunces',serif;font-weight:600;font-size:19px;letter-spacing:.02em;
+    display:inline-flex;gap:.4ch;align-items:baseline;margin-bottom:46px;
+  }
+  .logo b{color:var(--coral);font-weight:600}
+  .hero h1{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:clamp(34px,5.4vw,60px);
+    line-height:1.04;
+    letter-spacing:-.01em;
+    max-width:15ch;
+    margin-bottom:22px;
+  }
+  .hero p.lede{
+    font-size:clamp(16px,2vw,19px);
+    color:rgba(255,255,255,.8);
+    max-width:60ch;
+  }
+  .hero .date{
+    margin-top:34px;font-size:13px;color:rgba(255,255,255,.6);
+    letter-spacing:.04em;
+  }
 
-/* ── MAIN ─────────────────────────────────────────────── */
-.main { max-width: 1100px; margin: 0 auto; padding: 40px 48px 80px; }
+  /* progress band */
+  .band{
+    display:flex;flex-wrap:wrap;gap:14px;margin-top:46px;
+  }
+  .band .stat{
+    flex:1;min-width:150px;
+    background:rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.12);
+    border-radius:18px;padding:20px 22px;
+    backdrop-filter:blur(4px);
+  }
+  .band .stat .num{
+    font-family:'Fraunces',serif;font-size:34px;font-weight:600;line-height:1;
+  }
+  .band .stat .num.coral{color:var(--coral)}
+  .band .stat .num.teal{color:var(--teal)}
+  .band .stat .lbl{
+    font-size:12.5px;color:rgba(255,255,255,.7);margin-top:8px;letter-spacing:.01em;
+  }
 
-/* ── SECTION LABEL ────────────────────────────────────── */
-.section-label {
-  display: flex; align-items: center; gap: 10px;
-  margin-bottom: 16px; margin-top: 0;
-}
-.section-label:first-child { margin-top: 0; }
-.section-label span {
-  font-family: var(--font-display),'Inter',sans-serif;
-  font-weight: 800; font-size: 10px;
-  text-transform: uppercase; letter-spacing: 0.14em;
-  color: var(--brand-coral); white-space: nowrap;
-}
-.section-label-line { flex: 1; height: 1px; background: var(--outline); }
+  /* ---------- SECTION SCAFFOLD ---------- */
+  section.block{padding:62px 0}
+  .sec-head{display:flex;align-items:baseline;gap:16px;margin-bottom:30px}
+  .sec-head .tick{
+    font-family:'Fraunces',serif;font-size:13px;color:var(--coral);
+    font-weight:600;letter-spacing:.2em;white-space:nowrap;padding-top:4px;
+  }
+  .sec-head h2{
+    font-family:'Fraunces',serif;font-weight:600;
+    font-size:clamp(24px,3.2vw,33px);letter-spacing:-.01em;color:var(--navy);
+  }
+  .sec-head p{color:var(--muted);font-size:15px;margin-top:6px;max-width:64ch}
 
-/* ── TABLE WRAPPER ────────────────────────────────────── */
-.table-wrap-scroll {
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  border-radius: 18px;
-  box-shadow: var(--shadow);
-  border: 1px solid var(--outline);
-}
-.table-wrap {
-  background: #fff;
-  border-radius: 18px;
-  box-shadow: var(--shadow);
-  overflow: hidden;
-  border: 1px solid var(--outline);
-}
+  /* ---------- ESTADO POR MÓDULO ---------- */
+  .legend{display:flex;flex-wrap:wrap;gap:18px;margin-bottom:26px;font-size:13px;color:var(--muted)}
+  .legend span{display:inline-flex;align-items:center;gap:7px}
+  .dot{width:10px;height:10px;border-radius:50%}
+  .dot.op{background:var(--green)}
+  .dot.run{background:var(--teal-deep)}
+  .dot.rev{background:var(--amber)}
+  .dot.todo{background:#c2c1d0}
 
-table {
-  width: 100%;
-  border-collapse: collapse;
-}
+  .modgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(232px,1fr));gap:14px}
+  .mod{
+    background:var(--paper-card);border:1px solid var(--line);border-radius:16px;
+    padding:18px 18px 16px;position:relative;
+  }
+  .mod .barbg{height:6px;border-radius:99px;background:#eeedf4;overflow:hidden;margin-top:14px}
+  .mod .bar{height:100%;border-radius:99px}
+  .mod h3{font-size:15.5px;font-weight:600;color:var(--navy);display:flex;align-items:center;gap:8px}
+  .mod .state{font-size:12px;color:var(--muted);margin-top:3px}
+  .mod .pct{position:absolute;top:18px;right:18px;font-size:13px;font-weight:600;color:var(--muted)}
 
-/* HEAD */
-thead tr {
-  background: var(--brand-navy-deep);
-}
-thead th {
-  font-family: var(--font-display),'Inter',sans-serif;
-  font-weight: 800; font-size: 10px;
-  text-transform: uppercase; letter-spacing: 0.14em;
-  color: rgba(255,255,255,0.5);
-  padding: 12px 18px;
-  text-align: left;
-  white-space: nowrap;
-}
-thead th:last-child { text-align: right; }
+  /* ---------- COLUMNS: logrado / marcha / pendiente ---------- */
+  .three{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .col{
+    background:var(--paper-card);border:1px solid var(--line);border-radius:18px;
+    padding:24px 22px;
+  }
+  .col .ctag{
+    font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;
+    display:inline-block;padding:5px 11px;border-radius:99px;margin-bottom:16px;
+  }
+  .col.done .ctag{background:rgba(63,174,122,.12);color:#2c8159}
+  .col.run .ctag{background:rgba(63,154,160,.14);color:var(--teal-deep)}
+  .col.todo .ctag{background:rgba(239,85,84,.12);color:var(--coral)}
+  .col ul{list-style:none}
+  .col li{
+    font-size:14px;padding:9px 0 9px 22px;position:relative;border-top:1px solid var(--line);
+    color:#2f2e44;
+  }
+  .col li:first-of-type{border-top:none}
+  .col li::before{
+    content:"";position:absolute;left:0;top:15px;width:9px;height:9px;border-radius:50%;
+  }
+  .col.done li::before{background:var(--green)}
+  .col.run li::before{background:var(--teal-deep)}
+  .col.todo li::before{background:var(--coral)}
+  .col li b{font-weight:600;color:var(--navy)}
+  .col li span{display:block;color:var(--muted);font-size:12.5px;margin-top:1px}
 
-/* ROWS */
-tbody tr {
-  border-bottom: 1px solid var(--outline);
-  transition: background 140ms;
-}
-tbody tr:last-child { border-bottom: none; }
-tbody tr:hover { background: var(--neutral-50); }
+  /* ---------- HIGHLIGHTS ---------- */
+  .highs{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+  .high{
+    background:var(--navy);color:#fff;border-radius:20px;padding:28px;position:relative;overflow:hidden;
+  }
+  .high:nth-child(2){background:var(--navy-soft)}
+  .high .k{font-family:'Fraunces',serif;font-size:13px;color:var(--teal);letter-spacing:.12em;font-weight:600;margin-bottom:14px;text-transform:uppercase}
+  .high h3{font-family:'Fraunces',serif;font-weight:600;font-size:22px;margin-bottom:10px;line-height:1.15}
+  .high p{font-size:14.5px;color:rgba(255,255,255,.82)}
+  .high .chip{
+    display:inline-block;margin-top:16px;font-size:12.5px;font-weight:600;
+    background:rgba(112,189,194,.16);color:var(--teal);padding:6px 13px;border-radius:99px;
+  }
 
-td {
-  padding: 14px 18px;
-  vertical-align: middle;
-}
+  /* ---------- QA / quality ---------- */
+  .qa{background:var(--paper-card);border:1px solid var(--line);border-radius:20px;padding:8px 30px 12px}
+  .qa-item{display:flex;gap:18px;padding:20px 0;border-top:1px solid var(--line);align-items:flex-start}
+  .qa-item:first-child{border-top:none}
+  .qa-item .qn{font-family:'Fraunces',serif;font-weight:600;color:var(--coral);font-size:15px;min-width:30px}
+  .qa-item h4{font-size:15.5px;font-weight:600;color:var(--navy);margin-bottom:3px}
+  .qa-item p{font-size:13.5px;color:var(--muted)}
+  .qa-item .badge{margin-left:auto;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:5px 10px;border-radius:99px;background:rgba(224,160,58,.14);color:#a9762a;white-space:nowrap;align-self:center}
 
-/* Col: name */
-.td-name { min-width: 160px; }
-.td-link {
-  font-size: 11px;
-  margin-top: 3px;
-}
-.td-link a {
-  color: var(--brand-teal-deep);
-  text-decoration: none;
-  font-family: var(--font-mono), monospace;
-  font-size: 10px;
-  letter-spacing: 0.02em;
-}
-.td-link a:hover { text-decoration: underline; }
-.td-name-main {
-  font-family: var(--font-display),'Inter',sans-serif;
-  font-weight: 800; font-size: 14px;
-  color: var(--brand-navy); line-height: 1.2;
-}
-.td-name-sub {
-  font-size: 11px; color: var(--neutral-400);
-  margin-top: 2px; font-family: var(--font-mono),monospace;
-  text-transform: uppercase; letter-spacing: 0.04em;
-}
+  /* ---------- objetivos ---------- */
+  .obj{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:6px}
+  .obj .o{border:1px solid var(--line);background:var(--paper-card);border-radius:16px;padding:22px}
+  .obj .o .on{font-family:'Fraunces',serif;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--teal-deep);font-weight:600}
+  .obj .o h4{font-size:17px;color:var(--navy);font-weight:600;margin:8px 0 6px}
+  .obj .o p{font-size:13px;color:var(--muted)}
 
-/* Col: dot accent */
-.td-dot { width: 6px; padding-right: 0; padding-left: 18px; }
-.dot {
-  width: 8px; height: 8px; border-radius: 999px;
-  display: block; flex-shrink: 0;
-}
+  /* ---------- closing ---------- */
+  .closing{background:var(--navy);color:#fff;border-radius:24px;padding:42px;margin-top:20px;position:relative;overflow:hidden}
+  .closing::after{content:"";position:absolute;right:-60px;bottom:-60px;width:240px;height:240px;border-radius:50%;background:radial-gradient(circle,rgba(239,85,84,.3),transparent 70%)}
+  .closing .k{font-family:'Fraunces',serif;color:var(--teal);font-size:13px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:14px}
+  .closing p{font-size:clamp(17px,2.3vw,21px);font-family:'Fraunces',serif;line-height:1.45;max-width:56ch;position:relative;z-index:1}
 
-/* Col: desc */
-.td-desc {
-  font-size: 13px; color: var(--neutral-500);
-  line-height: 1.5; min-width: 200px; max-width: 340px;
-}
+  footer{padding:40px 0 56px;color:var(--muted);font-size:12.5px;text-align:center}
 
-/* Col: account */
-.td-account {
-  font-family: var(--font-mono),monospace;
-  font-size: 11px; color: var(--neutral-400);
-  white-space: nowrap;
-}
-
-/* Col: badge */
-.td-badge { white-space: nowrap; }
-.badge {
-  font-family: var(--font-display),'Inter',sans-serif;
-  font-weight: 800; font-size: 10px;
-  text-transform: uppercase; letter-spacing: 0.10em;
-  padding: 4px 10px; border-radius: 999px;
-  display: inline-block;
-}
-.badge-activo  { background: rgba(61,185,122,0.12); color: #2a9963; }
-.badge-legacy  { background: rgba(233,185,73,0.15); color: #a07520; }
-tbody tr.is-legacy { opacity: 0.45; }
-tbody tr.is-legacy:hover { opacity: 0.65; background: var(--neutral-50); }
-.badge-revisar { background: rgba(226,72,74,0.12);  color: var(--brand-coral-deep); }
-.badge-gratis  { background: rgba(112,189,194,0.15); color: var(--brand-teal-deep); }
-
-/* Col: price */
-.td-price { text-align: right; white-space: nowrap; min-width: 110px; }
-.price-main {
-  font-family: var(--font-display),'Inter',sans-serif;
-  font-weight: 800; font-size: 15px;
-  color: var(--brand-navy); display: block; line-height: 1;
-}
-.price-main.free  { color: var(--brand-teal-deep); }
-.price-main.tbd   { color: var(--brand-coral); }
-.price-period {
-  font-size: 10px; color: var(--neutral-400);
-  display: block; margin-top: 3px;
-}
-
-/* ── SUMMARY ──────────────────────────────────────────── */
-.summary {
-  margin-top: 40px;
-  background: var(--brand-navy-deep);
-  border-radius: 18px;
-  padding: 28px 36px;
-  position: relative; overflow: hidden;
-}
-.summary-glow {
-  position: absolute; right: -40px; top: 50%;
-  transform: translateY(-50%);
-  width: 280px; height: 280px; border-radius: 999px;
-  background: radial-gradient(circle, rgba(112,189,194,.12) 0%, transparent 70%);
-  pointer-events: none;
-}
-.summary-inner {
-  position: relative; z-index: 2;
-  display: flex; align-items: center;
-  justify-content: space-between; gap: 24px; flex-wrap: wrap;
-}
-.summary-left {}
-.summary-eyebrow {
-  font-family: var(--font-display),'Inter',sans-serif;
-  font-weight: 800; font-size: 10px;
-  text-transform: uppercase; letter-spacing: 0.14em;
-  color: var(--brand-teal); display: block; margin-bottom: 5px;
-}
-.summary-title {
-  font-family: var(--font-display),'Inter',sans-serif;
-  font-weight: 800; font-size: 18px; color: #fff;
-}
-.summary-nums { display: flex; gap: 32px; flex-wrap: wrap; }
-.summary-num .val {
-  font-family: var(--font-display),'Inter',sans-serif;
-  font-weight: 800; font-size: 28px; color: #fff;
-  display: block; line-height: 1;
-}
-.summary-num.coral .val { color: var(--brand-coral); }
-.summary-num.teal  .val { color: var(--brand-teal); }
-.summary-num .lbl {
-  font-size: 10px; color: rgba(255,255,255,0.4);
-  text-transform: uppercase; letter-spacing: 0.08em;
-  margin-top: 4px; display: block;
-}
-
-/* ── NOTA ─────────────────────────────────────────────── */
-.nota {
-  margin-top: 14px;
-  background: rgba(233,185,73,0.08);
-  border: 1px solid rgba(233,185,73,0.22);
-  border-radius: 12px; padding: 12px 18px;
-  font-size: 12px; color: #7a5c00; line-height: 1.55;
-}
-
-/* ── FOOTER ───────────────────────────────────────────── */
-footer {
-  background: var(--brand-navy-deep);
-  padding: 20px 48px;
-  display: flex; justify-content: space-between;
-  align-items: center; flex-wrap: wrap; gap: 8px;
-}
-footer span { font-size: 11px; color: rgba(255,255,255,0.35); }
-.theta-sm { width: 20px; height: 20px; color: var(--brand-teal); opacity: 0.4; }
-
-.section-group { margin-top: 48px; }
-.section-group:first-child { margin-top: 0; }
-.row-hidden { display: none; }
-.section-group.hidden { display: none; }
-
-/* ── RESPONSIVE ───────────────────────────────────────── */
-@media (max-width: 700px) {
-  .hero, .filters-bar, .main, footer { padding-left: 18px; padding-right: 18px; }
-  .hero-title { font-size: 28px; }
-  .td-desc, .td-account { display: none; }
-  thead th:nth-child(2), thead th:nth-child(3) { display: none; }
-  .summary-nums { gap: 18px; }
-}
+  @media(max-width:760px){
+    .three,.highs,.obj{grid-template-columns:1fr}
+    .hero{padding:52px 0 44px}
+    section.block{padding:46px 0}
+    .sec-head{flex-direction:column;gap:6px}
+  }
+  @media print{
+    body{background:#fff}
+    .hero,.high,.closing{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    section.block{padding:34px 0;break-inside:avoid}
+    .col,.mod,.qa,.high{break-inside:avoid}
+  }
 </style>
 </head>
 <body>
+
 <!-- HERO -->
 <header class="hero">
-<svg aria-hidden="true" class="hero-theta" fill="none" viewbox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-<circle cx="50" cy="50" r="40" stroke="currentColor" stroke-width="10"></circle>
-<rect fill="currentColor" height="10" width="72" x="14" y="45"></rect>
-</svg>
-<div class="hero-inner">
-<div>
-<span class="hero-eyebrow">Departamento TI · Asociación Theos Place</span>
-<h1 class="hero-title">Plataformas <span>Tecnológicas</span></h1>
-<p class="hero-sub">Inventario de herramientas y servicios digitales · Junio 2026</p>
-</div>
-<div class="hero-pills">
-<div class="hero-pill">
-<span class="val" id="counter">29</span>
-<span class="lbl">Plataformas</span>
-</div>
-<div class="hero-pill coral">
-<span class="val">~$474</span>
-<span class="lbl">Prom. mensual</span>
-</div>
-<div class="hero-pill teal">
-<span class="val">~$5,690</span>
-<span class="lbl">Est. anual</span>
-</div>
-</div>
-</div>
-</header>
-<!-- FILTERS -->
-<nav class="filters-bar">
-<span class="filters-lbl">Filtrar</span>
-<button class="filter-btn active" onclick="filterRows('all',this)">Todas</button>
-<button class="filter-btn" onclick="filterRows('web',this)">Web</button>
-<button class="filter-btn" onclick="filterRows('infra',this)">Infraestructura</button>
-<button class="filter-btn" onclick="filterRows('diseno',this)">Diseño &amp; Código</button>
-<button class="filter-btn" onclick="filterRows('auto',this)">Automatización</button>
-<button class="filter-btn" onclick="filterRows('marketing',this)">Marketing</button>
-<button class="filter-btn" onclick="filterRows('ia',this)">IA</button>
-<button class="filter-btn" onclick="filterRows('pagos',this)">Pagos</button>
-</nav>
-<main class="main">
-<!-- WEB & HOSTING -->
-<div class="section-group" data-section="web infra">
-<div class="section-label"><span class="section-label-text" style="color:var(--brand-coral)">Web, Infraestructura &amp; Datos</span><div class="section-label-line"></div></div>
-<div class="table-wrap-scroll"><div class="table-wrap" style="border-radius:18px;box-shadow:none;border:none">
-<table>
-<thead><tr><th>Plataforma</th><th>Descripción</th><th>Cuenta</th><th>Estado</th><th>Costo</th></tr></thead>
-<tbody>
-          <tr data-cat="web">
-<td class="td-name"><div class="td-name-main">Wix (antiguo)</div><div class="td-name-sub">Website legacy</div></td>
-<td class="td-desc">Plataforma anterior del sitio. Último pago realizado, no renovar.</td>
-<td class="td-account">theosplaceti@gmail.com</td>
-<td class="td-badge"><span class="badge badge-legacy">Legacy</span></td>
-<td class="td-price"><span class="price-main">$120</span><span class="price-period">pagado · vence jun 2027 · no renovar</span></td>
-</tr>
-          <tr data-cat="infra">
-<td class="td-name"><div class="td-name-main">Supabase</div><div class="td-name-sub">Base de datos / Backend</div></td>
-<td class="td-desc">PostgreSQL con API REST. Almacena datos del sitio y tienda (theos_store).</td>
-<td class="td-account">theosplaceti@gmail.com<div class="td-link"><a href="https://supabase.com/dashboard/project/jdcyptqnznmywgjvcpxm" target="_blank">supabase.com ↗</a></div></td>
-<td class="td-badge"><span class="badge badge-activo">Activo</span></td>
-<td class="td-price"><span class="price-main">$25</span><span class="price-period">por mes</span></td>
-</tr>
-          <tr data-cat="auto">
-<td class="td-name"><div class="td-name-main">N8N</div><div class="td-name-sub">Automatización de flujos</div></td>
-<td class="td-desc">Automatización no-code. Conecta sistemas y automatiza procesos internos.</td>
-<td class="td-account">ti@theosplace.org<div class="td-link"><a href="https://theosplace.app.n8n.cloud/home/workflows" target="_blank">theosplace.app.n8n.cloud ↗</a></div></td>
-<td class="td-badge"><span class="badge badge-activo">Activo</span></td>
-<td class="td-price"><span class="price-main">$24</span><span class="price-period">por mes</span></td>
-</tr>
-          <tr class="is-legacy" data-cat="infra">
-<td class="td-name"><div class="td-name-main">AWS Lightsail</div><div class="td-name-sub">WordPress hosting</div></td>
-<td class="td-desc">Hosting de WordPress en Lightsail. Servicio cancelado — costo residual este mes.</td>
-<td class="td-account">IAM: TheosTI<div class="td-link"><a href="https://767396970918.signin.aws.amazon.com/console" target="_blank">aws.amazon.com/console ↗</a></div></td>
-<td class="td-badge"><span class="badge badge-legacy">Legacy</span></td>
-<td class="td-price"><span class="price-main">~$9</span><span class="price-period">último mes (cancelado)</span></td>
-</tr>
-          <tr data-cat="infra">
-<td class="td-name"><div class="td-name-main">DomainsPricedRight</div><div class="td-name-sub">Registro de dominio</div></td>
-<td class="td-desc">Registrador del dominio theosplace.org. Renovación anual.</td>
-<td class="td-account">ti@theosplace.org<div class="td-link"><a href="https://account.secureserver.net/products?plid=1592&amp;del_code=1" target="_blank">account.secureserver.net ↗</a></div></td>
-<td class="td-badge"><span class="badge badge-activo">Activo</span></td>
-<td class="td-price"><span class="price-main">$19.99</span><span class="price-period">anual · Próximo pago: 8 nov 2026</span></td>
-</tr>
-          <tr data-cat="infra">
-<td class="td-name"><div class="td-name-main">AWS SES</div><div class="td-name-sub">Envío de emails</div></td>
-<td class="td-desc">Amazon Simple Email Service. Envío de correos transaccionales y notificaciones.</td>
-<td class="td-account">IAM: TheosTI<div class="td-link"><a href="https://767396970918.signin.aws.amazon.com/console" target="_blank">aws.amazon.com/console ↗</a></div></td>
-<td class="td-badge"><span class="badge badge-activo">Activo</span></td>
-<td class="td-price"><span class="price-main" style="font-size:12px">$0.10 / 1,000 emails</span><span class="price-period">3,000 gratis/mes (primer año)</span></td>
-</tr>
-          <tr data-cat="infra">
-<td class="td-name"><div class="td-name-main">Vercel</div><div class="td-name-sub">Hosting / Deploy</div></td>
-<td class="td-desc">Hosting y deploy automático de proyectos web. Integra con GitHub. Plan Pro por activar cuando sea necesario.</td>
-<td class="td-account">theosplaceti@gmail.com<div class="td-link"><a href="https://vercel.com/theos-ti-s-projects" target="_blank">vercel.com ↗</a></div></td>
-<td class="td-badge"><span class="badge badge-activo">Activo</span></td>
-<td class="td-price"><span class="price-main free">Gratis</span><span class="price-period">plan hobby · Pro $20/mes pronto</span></td>
-</tr>
-          <tr data-cat="infra">
-<td class="td-name"><div class="td-name-main">Cloudflare</div><div class="td-name-sub">DNS &amp; Seguridad</div></td>
-<td class="td-desc">Gestión de DNS de theosplace.org, CDN y protección contra ataques.</td>
-<td class="td-account">theosplaceti@gmail.com<div class="td-link"><a href="https://dash.cloudflare.com" target="_blank">dash.cloudflare.com ↗</a></div></td>
-<td class="td-badge"><span class="badge badge-activo">Activo</span></td>
-<td class="td-price"><span class="price-main free">Gratis</span><span class="price-period">plan free</span></td>
-</tr>
-          <tr data-cat="infra">
-<td class="td-name"><div class="td-name-main">GitHub</div><div class="td-name-sub">Control de versiones</div></td>
-<td class="td-desc">Repositorios de código fuente de proyectos web y automatizaciones TI.</td>
-<td class="td-account">theosplaceti@gmail.com<div class="td-link"><a href="https://github.com" target="_blank">github.com ↗</a></div></td>
-<td class="td-badge"><span class="badge badge-activo">Activo</span></td>
-<td class="td-price"><span class="price-main free">Gratis</span><span class="price-period">plan free</span></td>
-</tr>
-          <tr data-cat="marketing">
-<td class="td-name"><div class="td-name-main">Google Analytics</div><div class="td-name-sub">Analítica web</div></td>
-<td class="td-desc">Seguimiento de tráfico y comportamiento de usuarios en theosplace.org.</td>
-<td class="td-account">theosplaceti@gmail.com<div class="td-link"><a href="https://analytics.google.com" target="_blank">analytics.google.com ↗</a></div></td>
-<td class="td-badge"><span class="badge badge-activo">Activo</span></td>
-<td class="td-price"><span class="price-main free">Gratis</span><span class="price-period">plan free</span></td>
-</tr>
-          </tbody>
-</table>
-</div></div>
-</div>
-<!-- DISEÑO & CÓDIGO -->
-<div class="section-group" data-section="diseno">
-<div class="section-label"><span class="section-label-text" style="color:var(--brand-coral)">Diseño &amp; Código</span><div class="section-label-line"></div></div>
-<div class="table-wrap-scroll"><div class="table-wrap" style="border-radius:18px;box-shadow:none;border:none">
-<table>
-<thead><tr><th>Plataforma</th><th>Descripción</th><th>Cuenta</th><th>Estado</th><th>Costo</th></tr></thead>
-<tbody>
-          <tr data-cat="diseno">
-<td class="td-name"><div class="td-name-main">ProPresenter</div><div class="td-name-sub">Presentaciones en vivo</div></td>
-<td class="td-desc">Software para presentaciones y transmisiones en sedes. 8 de 20 seats en uso. Licencia anual.</td>
-<td class="td-account">experiencia@theosplace.org</td>
-<td class="td-badge"><span class="badge badge-activo">Activo</span></td>
-<td class="td-price"><span class="price-main">$469</span><span class="price-period">anual · Vence: 23 oct 2026</span></td>
-</tr>
-          <tr data-cat="diseno">
-<td class="td-name"><div class="td-name-main">Figma</div><div class="td-name-sub">Diseño UI/UX</div></td>
-<td class="td-desc">Diseño de interfaces, prototipos y design system de Theos Place.</td>
-<td class="td-account">ti@theosplace.org<div class="td-link"><a href="https://figma.com" target="_blank">figma.com ↗</a></div></td>
-<td class="td-badge"><span class="badge badge-activo">Activo</span></td>
-<td class="td-price"><span class="price-main">$192</span><span class="price-period">anual · Renueva: 12 jun 2027</span></td>
-</tr>
-          <tr data-cat="diseno">
-<td class="td-name"><div class="td-name-main">CapCut</div><div class="td-name-sub">Edición de video</div></td>
-<td class="td-desc">Edición de video para redes sociales. ⚠️ Plan y costo por confirmar.</td>
-<td class="td-account">comunicacion@theosplace.org</td>
-<td class="td-badge"><span class="badge badge-activo">Activo</span></td>
-<td class="td-price"><span class="price-main">~$15</span><span class="price-period">por mes (est.) · por confirmar*</span></td>
-</tr>
-          <tr data-cat="diseno">
-<td class="td-name"><div class="td-name-main">Opus Clip</div><div class="td-name-sub">Clips automáticos con IA</div></td>
-<td class="td-desc">Genera clips cortos de videos largos con IA. ⚠️ Plan y costo por confirmar.</td>
-<td class="td-account">comunicacion@theosplace.org</td>
-<td class="td-badge"><span class="badge badge-activo">Activo</span></td>
-<td class="td-price"><span class="price-main">~$89.99</span><span class="price-period">anual (est.) · por confirmar*</span></td>
-</tr>
-          <tr data-cat="web">
-<td class="td-name"><div class="td-name-main">Elfsight</div><div class="td-name-sub">Widgets web</div></td>
-<td class="td-desc">Widget de feed de Instagram embebido en el sitio web.</td>
-<td class="td-account">theosplaceti@gmail.com<div class="td-link"><a href="https://dash.elfsight.com/apps/instagram-feed" target="_blank">dash.elfsight.com ↗</a></div></td>
-<td class="td-badge"><span class="badge badge-activo">Activo</span></td>
-<td class="td-price"><span class="price-main">$48</span><span class="price-period">anual · Próximo pago: 8 jul 2027</span></td>
-</tr>
-          <tr data-cat="diseno">
-<td class="td-name"><div class="td-name-main">Adobe Cloud</div><div class="td-name-sub">Suite creativa</div></td>
-<td class="td-desc">Suite de Adobe usada por múltiples departamentos. Comunicación (diseño), Experiencia (Premiere), Estudios (Acrobat, InDesign).</td>
-<td class="td-account">comunicacion@theosplace.org<br/>experiencia@theosplace.org<br/>estudios@theosplace.org</td>
-<td class="td-badge"><span class="badge badge-activo">Activo</span></td>
-<td class="td-price"><span class="price-main tbd">?</span><span class="price-period">verificar plan</span></td>
-</tr>
-          </tbody>
-</table>
-</div></div>
-</div>
-<!-- PRODUCTIVIDAD -->
-<div class="section-group" data-section="auto">
-<div class="section-label"><span class="section-label-text" style="color:var(--brand-coral)">Productividad</span><div class="section-label-line"></div></div>
-<div class="table-wrap-scroll"><div class="table-wrap" style="border-radius:18px;box-shadow:none;border:none">
-<table>
-<thead><tr><th>Plataforma</th><th>Descripción</th><th>Cuenta</th><th>Estado</th><th>Costo</th></tr></thead>
-<tbody>
-          <tr data-cat="auto">
-<td class="td-name"><div class="td-name-main">Microsoft 365</div><div class="td-name-sub">Suite de productividad</div></td>
-<td class="td-desc">Business Basic (11 lic. × $6.30) + Business Standard (4 lic. × $12.50). Email, Teams, SharePoint, OneDrive, Power Automate y más.</td>
-<td class="td-account">ti@theosplace.org<div class="td-link"><a href="https://admin.microsoft.com" target="_blank">admin.microsoft.com ↗</a></div></td>
-<td class="td-badge"><span class="badge badge-activo">Activo</span></td>
-<td class="td-price"><span class="price-main">$119.30</span><span class="price-period">por mes (15 licencias)</span></td>
-</tr>
-          <tr data-cat="auto">
-<td class="td-name"><div class="td-name-main">Dropbox</div><div class="td-name-sub">Almacenamiento en la nube</div></td>
-<td class="td-desc">Almacenamiento y colaboración de archivos. Plan Standard, 5 licencias.</td>
-<td class="td-account">comunicacion@theosplace.org<div class="td-link"><a href="https://dropbox.com" target="_blank">dropbox.com ↗</a></div></td>
-<td class="td-badge"><span class="badge badge-activo">Activo</span></td>
-<td class="td-price"><span class="price-main">$630</span><span class="price-period">anual · Próximo pago: 26 sep 2026</span></td>
-</tr>
-          <tr data-cat="auto">
-<td class="td-name"><div class="td-name-main">Linktree</div><div class="td-name-sub">Página de enlaces</div></td>
-<td class="td-desc">Página de enlaces para dirigentes de Theos Place. Centraliza redes sociales y recursos.</td>
-<td class="td-account">dirigentestheos<div class="td-link"><a href="https://linktr.ee/dirigentestheos" target="_blank">linktr.ee/dirigentestheos ↗</a></div></td>
-<td class="td-badge"><span class="badge badge-activo">Activo</span></td>
-<td class="td-price"><span class="price-main free">Gratis</span><span class="price-period">plan free</span></td>
-</tr>
-          <tr data-cat="auto">
-<td class="td-name"><div class="td-name-main">Google Drive</div><div class="td-name-sub">Almacenamiento Google</div></td>
-<td class="td-desc">Almacenamiento y colaboración de archivos del equipo de comunicación.</td>
-<td class="td-account">comunicacion@theosplace.org</td>
-<td class="td-badge"><span class="badge badge-activo">Activo</span></td>
-<td class="td-price"><span class="price-main free">Gratis</span><span class="price-period">plan free</span></td>
-</tr>
-          <tr data-cat="auto">
-<td class="td-name"><div class="td-name-main">ClickUp</div><div class="td-name-sub">Gestión de proyectos</div></td>
-<td class="td-desc">Gestión de proyectos y tareas para el equipo de estudios.</td>
-<td class="td-account">estudios@theosplace.org</td>
-<td class="td-badge"><span class="badge badge-activo">Activo</span></td>
-<td class="td-price"><span class="price-main free">Gratis</span><span class="price-period">plan free</span></td>
-</tr>
-          <tr data-cat="auto">
-<td class="td-name"><div class="td-name-main">Trello</div><div class="td-name-sub">Gestión de tareas</div></td>
-<td class="td-desc">Tableros kanban para organización del equipo de comunicación.</td>
-<td class="td-account">comunicacion@theosplace.org</td>
-<td class="td-badge"><span class="badge badge-activo">Activo</span></td>
-<td class="td-price"><span class="price-main free">Gratis</span><span class="price-period">plan free</span></td>
-</tr>
-          <tr data-cat="auto">
-<td class="td-name"><div class="td-name-main">CCBChurch</div><div class="td-name-sub">Sistema administrativo</div></td>
-<td class="td-desc">Sistema de gestión de iglesia (PushPay). Será reemplazado por el nuevo sistema interno cuando esté listo.</td>
-<td class="td-account">ti@theosplace.org<div class="td-link"><a href="https://theosplace.ccbchurch.com/index.php" target="_blank">theosplace.ccbchurch.com ↗</a></div></td>
-<td class="td-badge"><span class="badge badge-activo">Activo</span></td>
-<td class="td-price"><span class="price-main tbd">?</span><span class="price-period">verificar precio</span></td>
-</tr>
-          <tr class="is-legacy" data-cat="auto">
-<td class="td-name"><div class="td-name-main">MooDIY Cloud</div><div class="td-name-sub">LMS / Educación</div></td>
-<td class="td-desc">Hosting administrado de Moodle LMS. Cuenta activa pero sin uso actualmente.</td>
-<td class="td-account">theosplaceti@gmail.com<div class="td-link"><a href="https://portal.moodiycloud.com/login" target="_blank">portal.moodiycloud.com ↗</a></div></td>
-<td class="td-badge"><span class="badge badge-legacy">Legacy</span></td>
-<td class="td-price"><span class="price-main free">Gratis</span><span class="price-period">Essentials Free</span></td>
-</tr>
-          </tbody>
-</table>
-</div></div>
-</div>
-<!-- COMUNICACIÓN & MARKETING -->
-<div class="section-group" data-section="marketing">
-<div class="section-label"><span class="section-label-text" style="color:var(--brand-coral)">Comunicación &amp; Marketing</span><div class="section-label-line"></div></div>
-<div class="table-wrap-scroll"><div class="table-wrap" style="border-radius:18px;box-shadow:none;border:none">
-<table>
-<thead><tr><th>Plataforma</th><th>Descripción</th><th>Cuenta</th><th>Estado</th><th>Costo</th></tr></thead>
-<tbody>
-          <tr data-cat="marketing">
-<td class="td-name"><div class="td-name-main">META Business</div><div class="td-name-sub">Publicidad digital</div></td>
-<td class="td-desc">Anuncios en Facebook e Instagram. Campañas de alcance y eventos.</td>
-<td class="td-account">Theos Place – Info<div class="td-link"><a href="https://business.facebook.com" target="_blank">business.facebook.com ↗</a></div></td>
-<td class="td-badge"><span class="badge badge-activo">Activo</span></td>
-<td class="td-price"><span class="price-main">~$35–45</span><span class="price-period">promedio mensual</span></td>
-</tr>
-          <tr data-cat="marketing">
-<td class="td-name"><div class="td-name-main">Zoom</div><div class="td-name-sub">Videoconferencias</div></td>
-<td class="td-desc">Reuniones, transmisiones en vivo y capacitaciones internas.</td>
-<td class="td-account">info@theosplace.org<div class="td-link"><a href="https://zoom.us" target="_blank">zoom.us ↗</a></div></td>
-<td class="td-badge"><span class="badge badge-activo">Activo</span></td>
-<td class="td-price"><span class="price-main">$14.16</span><span class="price-period">por usuario/mes · pago anual</span></td>
-</tr>
-          </tbody>
-</table>
-</div></div>
-</div>
-<!-- PAGOS -->
-<div class="section-group" data-section="pagos">
-<div class="section-label"><span class="section-label-text" style="color:var(--brand-coral)">Pagos</span><div class="section-label-line"></div></div>
-<div class="table-wrap-scroll"><div class="table-wrap" style="border-radius:18px;box-shadow:none;border:none">
-<table>
-<thead><tr><th>Plataforma</th><th>Descripción</th><th>Cuenta</th><th>Estado</th><th>Costo</th></tr></thead>
-<tbody>
-          <tr data-cat="pagos">
-<td class="td-name"><div class="td-name-main">Tilopay</div><div class="td-name-sub">Procesador de pagos CR</div></td>
-<td class="td-desc">Pasarela de pagos para CR. Activar módulo SINPE pendiente.</td>
-<td class="td-account">ti@theosplace.org<div class="td-link"><a href="https://admin.tilopay.com" target="_blank">admin.tilopay.com ↗</a></div></td>
-<td class="td-badge"><span class="badge badge-revisar">En progreso</span></td>
-<td class="td-price"><span class="price-main" style="font-size:12px">Tarjeta CR: 4.25% + $0.35</span><span class="price-period">SINPE: ~2% + $0.35</span><span class="price-period">Internacional: ❌</span></td>
-</tr>
-          <tr data-cat="pagos">
-<td class="td-name"><div class="td-name-main">PayPal Business</div><div class="td-name-sub">Pagos internacionales</div></td>
-<td class="td-desc">Pagos con tarjeta desde cualquier país. Cubre España y mercados internacionales. Aplicar a tarifa ONG vía TechSoup.</td>
-<td class="td-account">ti@theosplace.org<div class="td-link"><a href="https://paypal.com" target="_blank">paypal.com ↗</a></div></td>
-<td class="td-badge"><span class="badge badge-revisar">En progreso</span></td>
-<td class="td-price"><span class="price-main" style="font-size:12px">Tarjeta CR: 2.89% + $0.49</span><span class="price-period">SINPE: ❌</span><span class="price-period">Internacional: 2.89% + 1.5% + $0.49</span></td>
-</tr>
-          <tr data-cat="pagos">
-<td class="td-name"><div class="td-name-main">Yomeuno</div><div class="td-name-sub">Donaciones en línea</div></td>
-<td class="td-desc">Plataforma de donaciones del BAC Credomatic. Perfil activo hace más de 8 años. El 100% de cada donación llega a la organización.</td>
-<td class="td-account">yomeuno.com (BAC)<div class="td-link"><a href="https://yomeuno.com/costa-rica/organizaciones/asociacion-theos-place" target="_blank">yomeuno.com ↗</a></div></td>
-<td class="td-badge"><span class="badge badge-activo">Activo</span></td>
-<td class="td-price"><span class="price-main free">Gratis</span><span class="price-period">BAC cubre todos los costos</span></td>
-</tr>
-          </tbody>
-</table>
-</div></div>
-</div>
-<!-- IA -->
-<div class="section-group" data-section="ia">
-<div class="section-label"><span class="section-label-text" style="color:var(--brand-coral)">Inteligencia Artificial</span><div class="section-label-line"></div></div>
-<div class="table-wrap-scroll"><div class="table-wrap" style="border-radius:18px;box-shadow:none;border:none">
-<table>
-<thead><tr><th>Plataforma</th><th>Descripción</th><th>Cuenta</th><th>Estado</th><th>Costo</th></tr></thead>
-<tbody>
-          <tr data-cat="ia">
-<td class="td-name"><div class="td-name-main">Claude (Anthropic)</div><div class="td-name-sub">Asistente IA</div></td>
-<td class="td-desc">IA para soporte TI, análisis de datos y automatización de tareas internas.</td>
-<td class="td-account">ti@theosplace.org<div class="td-link"><a href="https://claude.ai" target="_blank">claude.ai ↗</a></div></td>
-<td class="td-badge"><span class="badge badge-activo">Activo</span></td>
-<td class="td-price"><span class="price-main">$96</span><span class="price-period">por mes</span></td>
-</tr>
-          <tr data-cat="ia">
-<td class="td-name"><div class="td-name-main">OpenAI</div><div class="td-name-sub">IA para chatbot</div></td>
-<td class="td-desc">API de OpenAI para el chatbot del sitio web. Consumo bajo, recarga cada ~6 meses.</td>
-<td class="td-account">ti@theosplace.org<div class="td-link"><a href="https://platform.openai.com" target="_blank">platform.openai.com ↗</a></div></td>
-<td class="td-badge"><span class="badge badge-activo">Activo</span></td>
-<td class="td-price"><span class="price-main">~$1</span><span class="price-period">por mes (est.)</span></td>
-</tr>
-          </tbody>
-</table>
-</div></div>
-</div>
-<!-- SUMMARY -->
-<div class="summary">
-<div class="summary-glow"></div>
-<div class="summary-inner">
-<div class="summary-left">
-<span class="summary-eyebrow">Gasto tecnológico estimado</span>
-<div class="summary-title">Theos Place — 2026</div>
-</div>
-<div class="summary-nums">
-<div class="summary-num">
-<span class="val">~$393</span>
-<span class="lbl">Mínimo mensual</span>
-</div>
-<div class="summary-num coral">
-<span class="val">~$455</span>
-<span class="lbl">Promedio mensual</span>
-</div>
-<div class="summary-num teal">
-<span class="val">~$5,460</span>
-<span class="lbl">Estimado anual</span>
-</div>
-</div>
-</div>
-</div>
-<div class="nota">
-    ⚠️ META Ads y AWS usan promedios estimados. Tilopay y PayPal cobran comisión por transacción, no incluida en el total. Wix antiguo ya está pagado hasta junio 2027 — no renovar. Adobe Cloud (3 cuentas), CapCut* y Opus Clip* pendientes de confirmar precio.
+  <div class="wrap">
+    <div class="logo">THEOS <b>PLACE</b></div>
+    <div class="eyebrow">Avance del sistema administrativo</div>
+    <h1>El sistema que sostiene la operación de Theos, en una sola plataforma.</h1>
+    <p class="lede">Un recorrido del estado actual: lo que ya está funcionando, lo que estamos cerrando estas semanas, y lo que falta para cubrir el 100% de la operación.</p>
+
+    <div class="band">
+      <div class="stat"><div class="num teal">~23 000</div><div class="lbl">Miembros gestionados (Costa Rica)</div></div>
+      <div class="stat"><div class="num">6</div><div class="lbl">Módulos en operación</div></div>
+      <div class="stat"><div class="num coral">5</div><div class="lbl">Módulos por construir o integrar</div></div>
+    </div>
+
+    <div class="date">Junio 2026</div>
   </div>
-</main>
+</header>
+
+<!-- ESTADO POR MÓDULO -->
+<section class="block">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="tick">01</div>
+      <div>
+        <h2>Estado por módulo</h2>
+        <p>Vista rápida de dónde está cada parte del sistema hoy.</p>
+      </div>
+    </div>
+
+    <div class="legend">
+      <span><i class="dot op"></i> En operación</span>
+      <span><i class="dot run"></i> En implementación</span>
+      <span><i class="dot rev"></i> En revisión / QA</span>
+      <span><i class="dot todo"></i> Por construir</span>
+    </div>
+
+    <div class="modgrid">
+      <div class="mod"><span class="pct">100%</span><h3>Miembros y detalle</h3><div class="state">En operación</div><div class="barbg"><div class="bar" style="width:100%;background:var(--green)"></div></div></div>
+      <div class="mod"><span class="pct">100%</span><h3>Eventos</h3><div class="state">En operación</div><div class="barbg"><div class="bar" style="width:100%;background:var(--green)"></div></div></div>
+      <div class="mod"><span class="pct">95%</span><h3>Estudios bíblicos</h3><div class="state">Operando · faltan excepciones de matrícula</div><div class="barbg"><div class="bar" style="width:95%;background:var(--green)"></div></div></div>
+      <div class="mod"><span class="pct">100%</span><h3>Dirigentes</h3><div class="state">En operación</div><div class="barbg"><div class="bar" style="width:100%;background:var(--green)"></div></div></div>
+      <div class="mod"><span class="pct">100%</span><h3>Servidores y comités</h3><div class="state">En operación</div><div class="barbg"><div class="bar" style="width:100%;background:var(--green)"></div></div></div>
+      <div class="mod"><span class="pct">100%</span><h3>Accesos y seguridad</h3><div class="state">En operación</div><div class="barbg"><div class="bar" style="width:100%;background:var(--green)"></div></div></div>
+      <div class="mod"><span class="pct">85%</span><h3>Comunicaciones · correo</h3><div class="state">SES listo · falta darse de baja por usuario</div><div class="barbg"><div class="bar" style="width:85%;background:var(--teal-deep)"></div></div></div>
+      <div class="mod"><span class="pct">15%</span><h3>Pagos en línea</h3><div class="state">Creando cuentas PayPal y Tilopay (~50%)</div><div class="barbg"><div class="bar" style="width:15%;background:var(--teal-deep)"></div></div></div>
+      <div class="mod"><span class="pct">35%</span><h3>Reportería</h3><div class="state">Primer reporte listo · resto en curso</div><div class="barbg"><div class="bar" style="width:35%;background:var(--teal-deep)"></div></div></div>
+      <div class="mod"><span class="pct">40%</span><h3>Formularios</h3><div class="state">Por revisar a fondo</div><div class="barbg"><div class="bar" style="width:40%;background:var(--amber)"></div></div></div>
+      <div class="mod"><span class="pct">—</span><h3>Datos internacionales</h3><div class="state">Migrar Madrid y sedes fuera de CR</div><div class="barbg"><div class="bar" style="width:8%;background:var(--amber)"></div></div></div>
+      <div class="mod"><span class="pct">0%</span><h3>Finanzas</h3><div class="state">Por construir</div><div class="barbg"><div class="bar" style="width:4%;background:#c2c1d0"></div></div></div>
+      <div class="mod"><span class="pct">0%</span><h3>Empleados</h3><div class="state">Por construir</div><div class="barbg"><div class="bar" style="width:4%;background:#c2c1d0"></div></div></div>
+      <div class="mod"><span class="pct">0%</span><h3>WhatsApp / Meta</h3><div class="state">Integración pendiente</div><div class="barbg"><div class="bar" style="width:4%;background:#c2c1d0"></div></div></div>
+      <div class="mod"><span class="pct">30%</span><h3>Pase en Wallets</h3><div class="state">QR listo · billeteras a futuro</div><div class="barbg"><div class="bar" style="width:30%;background:#c2c1d0"></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- LOGRADO / MARCHA / PENDIENTE -->
+<section class="block" style="background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="tick">02</div>
+      <div>
+        <h2>Dónde estamos</h2>
+        <p>Lo logrado, lo que está en marcha ahora mismo, y lo que queda por delante.</p>
+      </div>
+    </div>
+
+    <div class="three">
+      <div class="col done">
+        <span class="ctag">Ya funcionando</span>
+        <ul>
+          <li><b>Miembros y detalle</b><span>~23 000 perfiles completos, búsqueda avanzada, sede automática por asistencia, pase digital con QR.</span></li>
+          <li><b>Eventos</b><span>Calendario, eventos recurrentes, check-in por QR desde el celular, inscripciones, subeventos y validaciones.</span></li>
+          <li><b>Estudios bíblicos</b><span>Solicitudes, matrícula, grupos, cierre con notas e invitaciones. Operando; las excepciones de matrícula están en pruebas.</span></li>
+          <li><b>Dirigentes</b><span>Formación, disponibilidad, asignaciones, estados automáticos y acciones masivas. Módulo completo.</span></li>
+          <li><b>Servidores y comités</b><span>Puestos con aplicación en línea, comités y áreas, asignaciones. Módulo completo.</span></li>
+          <li><b>Accesos y seguridad</b><span>Permisos por rol y autenticación reforzada.</span></li>
+          <li><b>Reportería propia</b><span>Ya funcionando: se hizo un reporte de prueba (asistencia por sede) para validar la propuesta de migrar los reportes de Power BI al sistema.</span></li>
+          <li><b>Datos históricos de Costa Rica</b><span>Años de asistencia, estudios y donaciones integrados y unificados por sede.</span></li>
+        </ul>
+      </div>
+
+      <div class="col run">
+        <span class="ctag">En marcha ahora</span>
+        <ul>
+          <li><b>Plantillas de correo</b><span>Creación de las plantillas básicas de email con la configuración correspondiente de Amazon SES, listas para los envíos del sistema.</span></li>
+          <li><b>Darse de baja por usuario</b><span>Que cada persona pueda salirse de los correos masivos, para cumplir los requisitos de envíos masivos y cuidar la reputación de envío.</span></li>
+          <li><b>Pagos en línea</b><span>Creación de las cuentas de PayPal y Tilopay (~50%). La integración con el sistema viene después.</span></li>
+        </ul>
+      </div>
+
+      <div class="col todo">
+        <span class="ctag">Por delante</span>
+        <ul>
+          <li><b>Revisión de Formularios</b><span>Existe; falta validarlo a fondo.</span></li>
+          <li><b>Migrar datos internacionales</b><span>La carga actual fue solo Costa Rica; falta Madrid y las demás sedes fuera del país.</span></li>
+          <li><b>Apple / Google Wallet</b><span>Guardar el pase digital en el teléfono.</span></li>
+          <li><b>WhatsApp / Meta</b><span>Envíos desde el sistema con plantillas aprobadas.</span></li>
+          <li><b>Suite de 7 reportes</b><span>Replicar las páginas restantes con propósito ejecutivo.</span></li>
+          <li><b>Módulo de Empleados</b><span>Gestión del personal; alcance a definir con dirección.</span></li>
+          <li><b>Módulo de Finanzas</b><span>Pagos, donaciones, becas y devoluciones. Conecta con eventos y con donantes.</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HIGHLIGHTS -->
+<section class="block">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="tick">03</div>
+      <div>
+        <h2>Avances que mueven la aguja</h2>
+        <p>Dos cambios de este período que simplifican la experiencia y reducen dependencias externas.</p>
+      </div>
+    </div>
+
+    <div class="highs">
+      <div class="high">
+        <div class="k">Inscripciones</div>
+        <h3>Inscribirse con un clic, sin llenar formularios</h3>
+        <p>Muchas inscripciones pasarán a hacerse con un solo botón directo en el sistema, en lugar del proceso actual de llenar formularios. Menos fricción para la persona y menos trabajo manual de registro.</p>
+        <span class="chip">Más simple para el miembro</span>
+      </div>
+      <div class="high">
+        <div class="k">Reportería</div>
+        <h3>Reportes propios, en vivo, sin licencias</h3>
+        <p>Empezamos a reemplazar Power BI —que dependía de actualizar un Excel a mano— por reportes dentro del sistema con datos al instante y la identidad de Theos. El primer reporte ya está validado.</p>
+        <span class="chip">Sin costo de licencias por usuario</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QA / PRUEBAS -->
+<section class="block" style="background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="tick">04</div>
+      <div>
+        <h2>Calidad y pruebas en curso</h2>
+        <p>Antes de dar por cerrados los módulos, estamos verificando que todo funcione como se espera en uso real.</p>
+      </div>
+    </div>
+
+    <div class="qa">
+      <div class="qa-item">
+        <div class="qn">A</div>
+        <div>
+          <h4>Excepciones de matrícula</h4>
+          <p>Permisos especiales: que un coordinador pueda autorizar a una persona a inscribirse en un estudio aunque no cumpla todos los requisitos, de forma controlada y con registro de quién lo autorizó.</p>
+        </div>
+        <span class="badge">En proceso</span>
+      </div>
+      <div class="qa-item">
+        <div class="qn">B</div>
+        <div>
+          <h4>Validaciones de filtros</h4>
+          <p>Asegurar que los filtros de búsqueda (asistencia, sede, estudios, fechas) devuelvan resultados correctos al combinarse y no presenten errores.</p>
+        </div>
+        <span class="badge">En proceso</span>
+      </div>
+      <div class="qa-item">
+        <div class="qn">C</div>
+        <div>
+          <h4>Creación de formularios</h4>
+          <p>Revisar y validar el módulo de formularios para dejarlo listo para uso real.</p>
+        </div>
+        <span class="badge">En proceso</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OBJETIVOS -->
+<section class="block">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="tick">05</div>
+      <div>
+        <h2>Alineado a los 3 objetivos del año</h2>
+        <p>La reportería ejecutiva que viene se organiza alrededor de las metas de la organización.</p>
+      </div>
+    </div>
+    <div class="obj">
+      <div class="o"><div class="on">Objetivo 1</div><h4>Crecer en sedes</h4><p>Indicadores de crecimiento y asistencia por sede, con semáforo de estado.</p></div>
+      <div class="o"><div class="on">Objetivo 2</div><h4>Captar personas nuevas</h4><p>Seguimiento de nuevos y, a futuro, su retención.</p></div>
+      <div class="o"><div class="on">Objetivo 3</div><h4>Más servidonantes</h4><p>Embudo de asistente a servidor y donante, medido directo.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CLOSING -->
+<section class="block">
+  <div class="wrap">
+    <div class="closing">
+      <div class="k">En resumen</div>
+      <p>Los módulos centrales de Theos ya están completos y operando: miembros, eventos, estudios, dirigentes y servidores. Este período cerró la base de las comunicaciones por correo y arrancó los pagos en línea y la reportería propia. Quedan por construir Finanzas y Empleados, migrar las sedes internacionales (Madrid y fuera de CR), revisar Formularios y completar WhatsApp y billeteras — el camino para cubrir el 100% de la operación.</p>
+    </div>
+  </div>
+</section>
+
 <footer>
-<span>Departamento TI · Asociación Theos Place · ti@theosplace.org</span>
-<svg aria-hidden="true" class="theta-sm" fill="none" viewbox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-<circle cx="50" cy="50" r="40" stroke="currentColor" stroke-width="10"></circle>
-<rect fill="currentColor" height="10" width="72" x="14" y="45"></rect>
-</svg>
-<span>Documento interno — no distribuir externamente</span>
+  Theos Place · Sistema Administrativo · Reporte de avance para dirección · Junio 2026
 </footer>
-<script>
-function filterRows(cat, btn) {
-  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
 
-  const rows = document.querySelectorAll('tbody tr');
-  rows.forEach(row => {
-    if (cat === 'all' || row.getAttribute('data-cat') === cat) {
-      row.classList.remove('row-hidden');
-    } else {
-      row.classList.add('row-hidden');
-    }
-  });
-
-  // Hide sections with no visible rows
-  document.querySelectorAll('.section-group').forEach(group => {
-    const visible = group.querySelectorAll('tbody tr:not(.row-hidden)').length;
-    group.classList.toggle('hidden', visible === 0);
-  });
-
-  const total = document.querySelectorAll('tbody tr:not(.row-hidden)').length;
-  document.getElementById('counter').textContent = total;
-}
-</script>
 </body>
 </html>
