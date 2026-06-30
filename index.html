@@ -138,6 +138,8 @@
   .mod .imp::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--teal)}
   .mod .imp.todo-note{color:var(--coral)}
   .mod .imp.todo-note::before{background:var(--coral)}
+  .mod .imp.dev-note{color:#a9762a}
+  .mod .imp.dev-note::before{background:var(--amber)}
   .mod .note{font-size:12px;color:var(--muted);margin-top:9px;line-height:1.4}
 
   /* ---------- COLUMNS: logrado / marcha / pendiente ---------- */
@@ -249,7 +251,7 @@
 
     <div class="band">
       <div class="stat"><div class="num teal">~23 000</div><div class="lbl">Miembros gestionados (Costa Rica)</div></div>
-      <div class="stat"><div class="num">6</div><div class="lbl">Módulos funcionales</div></div>
+      <div class="stat"><div class="num">7</div><div class="lbl">Módulos funcionales</div></div>
       <div class="stat"><div class="num coral">2</div><div class="lbl">Módulos por construir desde cero</div></div>
     </div>
 
@@ -277,13 +279,13 @@
 
     <div class="modgrid">
       <div class="mod"><div class="top"><h3>Miembros y detalle</h3><span class="pill op">Funcional</span></div><div class="imp">Mejora planeada: pase en wallets</div></div>
-      <div class="mod"><div class="top"><h3>Eventos</h3><span class="pill op">Funcional</span></div><div class="imp">Mejora planeada: pase en wallets</div></div>
-      <div class="mod"><div class="top"><h3>Estudios bíblicos</h3><span class="pill op">Funcional</span></div><div class="imp todo-note">Pendiente: excepciones de matrícula</div></div>
+      <div class="mod"><div class="top"><h3>Eventos</h3><span class="pill op">Funcional</span></div><div class="imp">Mejora planeada: pase en wallets · inscripción con pago en línea</div></div>
+      <div class="mod"><div class="top"><h3>Estudios bíblicos</h3><span class="pill op">Funcional</span></div><div class="imp todo-note">Pendiente: recomendación CDEB en Discípulos y Panorama</div><div class="imp">Mejora planeada: matrícula con pago en línea</div></div>
       <div class="mod"><div class="top"><h3>Dirigentes</h3><span class="pill op">Funcional</span></div></div>
-      <div class="mod"><div class="top"><h3>Servidores y comités</h3><span class="pill op">Funcional</span></div></div>
+      <div class="mod"><div class="top"><h3>Servidores y comités</h3><span class="pill op">Funcional</span></div><div class="imp dev-note">En desarrollo: nuevo proceso de puestos vacantes</div></div>
       <div class="mod"><div class="top"><h3>Accesos y seguridad</h3><span class="pill op">Funcional</span></div></div>
-      <div class="mod"><div class="top"><h3>Comunicaciones</h3><span class="pill run">En desarrollo</span></div><div class="note">Correo (SES) con plantillas y baja por usuario.</div></div>
-      <div class="mod"><div class="top"><h3>Pagos en línea</h3><span class="pill run">En desarrollo</span></div><div class="note">Creando cuentas de PayPal y Tilopay.</div></div>
+      <div class="mod"><div class="top"><h3>Comunicaciones</h3><span class="pill op">Funcional</span></div><div class="imp todo-note">Pendiente: envío de afiliación y autenticación de cada miembro</div></div>
+      <div class="mod"><div class="top"><h3>Pagos en línea</h3><span class="pill run">En desarrollo</span></div><div class="note">Creando la cuenta de Tilopay.</div></div>
       <div class="mod"><div class="top"><h3>Reportería</h3><span class="pill todo">Pendiente</span></div><div class="note">Reporte de prueba listo; falta la mayor parte.</div></div>
       <div class="mod"><div class="top"><h3>Formularios</h3><span class="pill run">En desarrollo</span></div><div class="note">Existe; en revisión y validación.</div></div>
       <div class="mod"><div class="top"><h3>Datos internacionales</h3><span class="pill todo">Pendiente</span></div><div class="note">Migrar Madrid y sedes fuera de CR.</div></div>
@@ -310,9 +312,10 @@
         <ul>
           <li><b>Miembros y detalle</b><span>~23 000 perfiles, búsqueda avanzada, sede automática por asistencia, pase digital con QR.</span></li>
           <li><b>Eventos</b><span>Calendario, eventos recurrentes, check-in por QR desde el celular, inscripciones, subeventos y validaciones.</span></li>
-          <li><b>Estudios bíblicos</b><span>Solicitudes, matrícula, grupos, cierre con notas e invitaciones.</span></li>
+          <li><b>Estudios bíblicos</b><span>Solicitudes, matrícula, grupos, cierre con notas, invitaciones y excepciones de matrícula.</span></li>
           <li><b>Dirigentes</b><span>Formación, disponibilidad, asignaciones, estados automáticos y acciones masivas.</span></li>
-          <li><b>Servidores y comités</b><span>Puestos con aplicación en línea, comités y áreas, asignaciones.</span></li>
+          <li><b>Servidores y comités</b><span>Puestos con aplicación en línea, comités y áreas, asignaciones. Nuevo proceso de puestos vacantes en desarrollo.</span></li>
+          <li><b>Comunicaciones</b><span>Correo (SES) con plantillas y baja por usuario. Pendiente: envío de afiliación y autenticación de cada miembro.</span></li>
           <li><b>Accesos y seguridad</b><span>Permisos por rol y autenticación reforzada.</span></li>
           <li><b>Datos históricos de Costa Rica</b><span>Años de asistencia, estudios y donaciones integrados y unificados por sede.</span></li>
         </ul>
@@ -321,9 +324,9 @@
       <div class="col run">
         <span class="ctag">En desarrollo</span>
         <ul>
-          <li><b>Plantillas de correo</b><span>Creación de las plantillas básicas de email con la configuración correspondiente de Amazon SES, listas para los envíos del sistema.</span></li>
-          <li><b>Darse de baja por usuario</b><span>Que cada persona pueda salirse de los correos masivos, para cumplir los requisitos de envíos masivos y cuidar la reputación de envío.</span></li>
-          <li><b>Pagos en línea</b><span>Creación de las cuentas de PayPal y Tilopay. La integración con el sistema viene después.</span></li>
+          <li><b>Envío de afiliación y acceso</b><span>Lógica para enviar la afiliación a cada persona y habilitar su autenticación al sistema. Pendiente del módulo de comunicaciones, en progreso.</span></li>
+          <li><b>Puestos vacantes (servidores)</b><span>Nuevo proceso para que los líderes soliciten vacantes por comité, con aprobación y activación automática del servidor.</span></li>
+          <li><b>Pagos en línea</b><span>Creación de la cuenta de Tilopay. La integración con el sistema viene después.</span></li>
           <li><b>Formularios</b><span>El módulo existe; está en revisión y validación para dejarlo listo para uso real.</span></li>
         </ul>
       </div>
@@ -331,7 +334,8 @@
       <div class="col todo">
         <span class="ctag">Por delante</span>
         <ul>
-          <li><b>Excepciones de matrícula</b><span>Permisos especiales para inscribir en estudios sin cumplir todos los requisitos, con registro de quién autoriza.</span></li>
+          <li><b>Recomendación CDEB en Discípulos y Panorama</b><span>Nuevo proceso de recomendación dentro del recorrido de estudios.</span></li>
+          <li><b>Mensajería por WhatsApp</b><span>Sumar WhatsApp al módulo de comunicaciones para enviar mensajes desde el sistema, como complemento al correo.</span></li>
           <li><b>Reportería completa</b><span>Se hizo un reporte de prueba (asistencia por sede) para validar la propuesta de migrar de Power BI; falta construir la suite de reportes con propósito ejecutivo.</span></li>
           <li><b>Migrar datos internacionales</b><span>La carga actual fue solo Costa Rica; falta Madrid y las demás sedes fuera del país.</span></li>
           <li><b>Módulo de Empleados</b><span>Gestión del personal; alcance a definir con dirección.</span></li>
@@ -362,9 +366,9 @@
       </div>
       <div class="pcard">
         <div class="ptag">A futuro</div>
-        <h3>WhatsApp / Meta</h3>
-        <p>Enviar mensajes desde el sistema por WhatsApp con plantillas aprobadas, como complemento al correo. Parte de la evolución del módulo de comunicaciones.</p>
-        <div class="scope">Módulo: Comunicaciones</div>
+        <h3>Pago en línea integrado</h3>
+        <p>Matrícula a estudios e inscripción a eventos con pago en línea directo, una vez que la pasarela (Tilopay) esté integrada al sistema.</p>
+        <div class="scope">Módulos: Estudios + Eventos</div>
       </div>
     </div>
   </div>
@@ -393,7 +397,7 @@
   <div class="wrap">
     <div class="closing">
       <div class="k">En resumen</div>
-      <p>Los módulos centrales de Theos ya son funcionales y están en uso: miembros, eventos, estudios, dirigentes y servidores. En desarrollo están las comunicaciones (correo y WhatsApp), los pagos en línea y la reportería. Quedan por construir desde cero Finanzas y Empleados, migrar las sedes internacionales, revisar Formularios y sumar el pase en billeteras.</p>
+      <p>Los módulos centrales de Theos ya son funcionales y están en uso: miembros, eventos, estudios, dirigentes, servidores y comunicaciones. En desarrollo están los pagos en línea, los formularios, el nuevo proceso de puestos vacantes y el envío de afiliación y acceso de miembros. Quedan por delante la reportería completa, la mensajería por WhatsApp, migrar las sedes internacionales, y construir desde cero Finanzas y Empleados.</p>
     </div>
   </div>
 </section>
