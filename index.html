@@ -12,14 +12,14 @@
     --navy-soft:#272463;
     --coral:#EF5554;
     --teal:#70BDC2;
-    --teal-deep:#3f9aa0;
+    --teal-deep:#2f7f85;
     --paper:#F6F5F2;
     --paper-card:#FFFFFF;
     --ink:#1b1a2e;
-    --muted:#6c6b82;
+    --muted:#5a5970;
     --line:#e7e6ef;
-    --green:#3fae7a;
-    --amber:#e0a03a;
+    --green:#2c8159;
+    --amber:#9a6a1f;
   }
 
   *{box-sizing:border-box;margin:0;padding:0}
@@ -30,11 +30,18 @@
     font-family:'Inter',system-ui,sans-serif;
     background:var(--paper);
     color:var(--ink);
-    line-height:1.55;
+    line-height:1.6;
     -webkit-font-smoothing:antialiased;
   }
 
-  .wrap{max-width:1080px;margin:0 auto;padding:0 28px}
+  a{color:var(--teal-deep)}
+  a:focus-visible, button:focus-visible{
+    outline:3px solid var(--teal-deep);
+    outline-offset:2px;
+    border-radius:4px;
+  }
+
+  .wrap{max-width:1240px;margin:0 auto;padding:0 clamp(20px,4vw,48px)}
 
   /* ---------- HERO ---------- */
   .hero{
@@ -67,11 +74,11 @@
   }
   .hero p.lede{
     font-size:clamp(16px,2vw,19px);
-    color:rgba(255,255,255,.8);
+    color:rgba(255,255,255,.9);
     max-width:60ch;
   }
   .hero .date{
-    margin-top:34px;font-size:13px;color:rgba(255,255,255,.6);
+    margin-top:34px;font-size:13px;color:rgba(255,255,255,.75);
     letter-spacing:.04em;
   }
 
@@ -92,7 +99,7 @@
   .band .stat .num.coral{color:var(--coral)}
   .band .stat .num.teal{color:var(--teal)}
   .band .stat .lbl{
-    font-size:12.5px;color:rgba(255,255,255,.7);margin-top:8px;letter-spacing:.01em;
+    font-size:12.5px;color:rgba(255,255,255,.85);margin-top:8px;letter-spacing:.01em;
   }
 
   /* ---------- SECTION SCAFFOLD ---------- */
@@ -187,6 +194,46 @@
   .pcard p{font-size:13.5px;color:#46586a}
   .pcard .scope{font-size:12px;color:var(--teal-deep);font-weight:600;margin-top:14px}
 
+  /* ---------- ROADMAP / TIMELINE ---------- */
+  .roadmap{display:flex;flex-direction:column;gap:0;margin-top:8px}
+  .phase{
+    display:grid;grid-template-columns:auto 1fr;gap:22px;
+    padding:0 0 28px 0;position:relative;
+  }
+  .phase:last-child{padding-bottom:0}
+  /* línea vertical que conecta las fases */
+  .phase::before{
+    content:"";position:absolute;left:23px;top:8px;bottom:-8px;width:2px;
+    background:var(--line);z-index:0;
+  }
+  .phase:last-child::before{display:none}
+  .phase .marker{
+    width:48px;height:48px;border-radius:50%;flex-shrink:0;z-index:1;
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Fraunces',serif;font-weight:600;font-size:17px;
+    background:var(--navy);color:#fff;
+  }
+  .phase.now .marker{background:var(--coral)}
+  .phase .body{padding-top:4px;padding-bottom:8px}
+  .phase .when{
+    display:inline-block;font-size:11.5px;font-weight:700;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--teal-deep);
+    background:rgba(112,189,194,.16);padding:4px 11px;border-radius:99px;margin-bottom:10px;
+  }
+  .phase.now .when{color:var(--coral);background:rgba(239,85,84,.13)}
+  .phase h3{font-family:'Fraunces',serif;font-weight:600;font-size:20px;color:var(--navy);margin-bottom:8px;line-height:1.2}
+  .phase .items{font-size:14px;color:#2f2e44;line-height:1.7}
+  .phase .items b{color:var(--navy);font-weight:600}
+  .phase .kicks{
+    margin-top:14px;background:var(--paper);border:1px solid var(--line);
+    border-radius:14px;padding:14px 16px;
+  }
+  .phase .kicks .kt{font-size:11.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:9px}
+  .phase .kick{display:flex;justify-content:space-between;gap:12px;font-size:13.5px;padding:5px 0;border-top:1px solid var(--line)}
+  .phase .kick:first-of-type{border-top:none}
+  .phase .kick .who{color:#2f2e44}
+  .phase .kick .day{color:var(--navy);font-weight:600;white-space:nowrap}
+
   /* ---------- HIGHLIGHTS ---------- */
   .highs{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
   .high{
@@ -225,17 +272,31 @@
 
   footer{padding:40px 0 56px;color:var(--muted);font-size:12.5px;text-align:center}
 
+  @media(max-width:900px){
+    .three,.highs,.obj,.plan{grid-template-columns:1fr !important}
+  }
   @media(max-width:760px){
-    .three,.highs,.obj{grid-template-columns:1fr}
     .hero{padding:52px 0 44px}
     section.block{padding:46px 0}
     .sec-head{flex-direction:column;gap:6px}
+    .band .stat{min-width:calc(50% - 7px)}
+    .closing{padding:30px 24px}
+    .phase{gap:16px}
+    .phase .kick{flex-direction:column;gap:2px}
+    .phase .kick .day{white-space:normal}
+  }
+  @media(max-width:440px){
+    .modgrid{grid-template-columns:1fr}
+    .band .stat{min-width:100%}
+    .phase{grid-template-columns:1fr}
+    .phase::before{display:none}
+    .phase .marker{width:40px;height:40px;font-size:15px}
   }
   @media print{
     body{background:#fff}
-    .hero,.high,.closing{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .hero,.high,.closing,.phase .marker{-webkit-print-color-adjust:exact;print-color-adjust:exact}
     section.block{padding:34px 0;break-inside:avoid}
-    .col,.mod,.qa,.high{break-inside:avoid}
+    .col,.mod,.qa,.high,.phase,.pcard{break-inside:avoid}
   }
 </style>
 </head>
@@ -247,7 +308,7 @@
     <div class="logo">THEOS <b>PLACE</b></div>
     <div class="eyebrow">Avance del sistema administrativo</div>
     <h1>El sistema que sostiene la operación de Theos, en una sola plataforma.</h1>
-    <p class="lede">Un recorrido del estado actual: lo que ya está funcionando, lo que estamos cerrando estas semanas, y lo que falta para cubrir el 100% de la operación.</p>
+    <p class="lede">Un recorrido del estado actual: lo que ya está funcionando, lo que estamos cerrando, y la ruta de trabajo de los próximos meses.</p>
 
     <div class="band">
       <div class="stat"><div class="num teal">~23 000</div><div class="lbl">Miembros gestionados (Costa Rica)</div></div>
@@ -282,7 +343,7 @@
       <div class="mod"><div class="top"><h3>Eventos</h3><span class="pill op">Funcional</span></div><div class="imp">Mejora planeada: pase en wallets · inscripción con pago en línea</div></div>
       <div class="mod"><div class="top"><h3>Estudios bíblicos</h3><span class="pill op">Funcional</span></div><div class="imp todo-note">Pendiente: recomendación CDEB en Discípulos y Panorama</div><div class="imp">Mejora planeada: matrícula con pago en línea</div></div>
       <div class="mod"><div class="top"><h3>Dirigentes</h3><span class="pill op">Funcional</span></div></div>
-      <div class="mod"><div class="top"><h3>Servidores y comités</h3><span class="pill op">Funcional</span></div><div class="imp dev-note">En desarrollo: nuevo proceso de puestos vacantes</div></div>
+      <div class="mod"><div class="top"><h3>Servidores y comités</h3><span class="pill op">Funcional</span></div></div>
       <div class="mod"><div class="top"><h3>Accesos y seguridad</h3><span class="pill op">Funcional</span></div></div>
       <div class="mod"><div class="top"><h3>Comunicaciones</h3><span class="pill op">Funcional</span></div><div class="imp todo-note">Pendiente: envío de afiliación y autenticación · formularios</div></div>
       <div class="mod"><div class="top"><h3>Reportería</h3><span class="pill todo">Pendiente</span></div><div class="note">Reporte de prueba listo; falta la mayor parte.</div></div>
@@ -311,7 +372,7 @@
           <li><b>Eventos</b><span>Calendario, eventos recurrentes, check-in por QR desde el celular, inscripciones, subeventos y validaciones.</span></li>
           <li><b>Estudios bíblicos</b><span>Solicitudes, matrícula, grupos, cierre con notas, invitaciones y excepciones de matrícula.</span></li>
           <li><b>Dirigentes</b><span>Formación, disponibilidad, asignaciones, estados automáticos y acciones masivas.</span></li>
-          <li><b>Servidores y comités</b><span>Puestos con aplicación en línea, comités y áreas, asignaciones. Nuevo proceso de puestos vacantes en desarrollo.</span></li>
+          <li><b>Servidores y comités</b><span>Puestos con aplicación en línea, comités y áreas, asignaciones, y proceso de puestos vacantes.</span></li>
           <li><b>Comunicaciones</b><span>Correo (SES) con plantillas y baja por usuario. Pendiente: envío de afiliación y autenticación, y formularios.</span></li>
           <li><b>Accesos y seguridad</b><span>Permisos por rol y autenticación reforzada.</span></li>
           <li><b>Datos históricos de Costa Rica</b><span>Años de asistencia, estudios y donaciones integrados y unificados por sede.</span></li>
@@ -321,9 +382,9 @@
       <div class="col run">
         <span class="ctag">En desarrollo</span>
         <ul>
+          <li><b>Pruebas de todos los módulos</b><span>Verificación integral de cada módulo en uso real antes de los arranques con usuarios, para asegurar que todo funcione como se espera.</span></li>
+          <li><b>Mejora de creación de correos</b><span>Refinar el editor y el flujo de creación de correos para que sea más claro y fácil de usar.</span></li>
           <li><b>Envío de afiliación y acceso</b><span>Lógica para enviar la afiliación a cada persona y habilitar su autenticación al sistema. Pendiente del módulo de comunicaciones, en progreso.</span></li>
-          <li><b>Puestos vacantes (servidores)</b><span>Nuevo proceso para que los líderes soliciten vacantes por comité, con aprobación y activación automática del servidor.</span></li>
-          <li><b>Integración de pagos (Tilopay)</b><span>Creación de la cuenta de Tilopay y su integración para cobrar matrícula de estudios e inscripción a eventos directamente desde el sistema.</span></li>
           <li><b>Formularios</b><span>Parte del módulo de comunicaciones; en revisión y validación para dejarlo listo para uso real.</span></li>
         </ul>
       </div>
@@ -331,6 +392,7 @@
       <div class="col todo">
         <span class="ctag">Por delante</span>
         <ul>
+          <li><b>Integración de pagos (Tilopay)</b><span>Cuenta de Tilopay y su integración para cobrar matrícula de estudios e inscripción a eventos directamente desde el sistema.</span></li>
           <li><b>Recomendación CDEB en Discípulos y Panorama</b><span>Nuevo proceso de recomendación dentro del recorrido de estudios.</span></li>
           <li><b>Mensajería por WhatsApp</b><span>Sumar WhatsApp al módulo de comunicaciones para enviar mensajes desde el sistema, como complemento al correo.</span></li>
           <li><b>Reportería completa</b><span>Se hizo un reporte de prueba (asistencia por sede) para validar la propuesta de migrar de Power BI; falta construir la suite de reportes con propósito ejecutivo.</span></li>
@@ -371,30 +433,68 @@
   </div>
 </section>
 
-<!-- OBJETIVOS -->
-<section class="block">
+<!-- ROADMAP / TIMELINE -->
+<section class="block" style="background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
   <div class="wrap">
     <div class="sec-head">
       <div class="tick">04</div>
       <div>
-        <h2>Alineado a los 3 objetivos del año</h2>
-        <p>La reportería ejecutiva que viene se organiza alrededor de las metas de la organización.</p>
+        <h2>Ruta de trabajo por fases</h2>
+        <p>El plan de los próximos meses, de agosto en adelante, organizado en cinco fases.</p>
       </div>
     </div>
-    <div class="obj">
-      <div class="o"><div class="on">Objetivo 1</div><h4>Crecer en sedes</h4><p>Indicadores de crecimiento y asistencia por sede, con semáforo de estado.</p></div>
-      <div class="o"><div class="on">Objetivo 2</div><h4>Captar personas nuevas</h4><p>Seguimiento de nuevos y, a futuro, su retención.</p></div>
-      <div class="o"><div class="on">Objetivo 3</div><h4>Más servidonantes</h4><p>Embudo de asistente a servidor y donante, medido directo.</p></div>
-    </div>
-  </div>
-</section>
 
-<!-- CLOSING -->
-<section class="block">
-  <div class="wrap">
-    <div class="closing">
-      <div class="k">En resumen</div>
-      <p>Los módulos centrales de Theos ya son funcionales y están en uso: miembros, eventos, estudios, dirigentes, servidores y comunicaciones. En desarrollo están la integración de pagos (Tilopay) para estudios y eventos, los formularios, el nuevo proceso de puestos vacantes y el envío de afiliación y acceso de miembros. Quedan por delante la reportería completa, la mensajería por WhatsApp, migrar las sedes internacionales, y construir desde cero Finanzas y Empleados.</p>
+    <div class="roadmap">
+      <div class="phase now">
+        <div class="marker" aria-hidden="true">1</div>
+        <div class="body">
+          <span class="when">Agosto 2026 · en curso</span>
+          <h3>Reemplazar CCB con las mismas funcionalidades</h3>
+          <p class="items">Llevar a la nueva plataforma la paridad completa con el sistema actual: <b>estudios, check-in, matrícula, servidores, eventos, miembros y comunicaciones</b> (formularios incluido dentro de comunicaciones).</p>
+          <div class="kicks">
+            <div class="kt">Arranques (kick offs)</div>
+            <div class="kick"><span class="who">Staff y usuarios clave</span><span class="day">1 de agosto</span></div>
+            <div class="kick"><span class="who">Encargados de comités</span><span class="day">17 de agosto</span></div>
+            <div class="kick"><span class="who">Estudiantes / matrícula</span><span class="day">31 de agosto</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="phase">
+        <div class="marker" aria-hidden="true">2</div>
+        <div class="body">
+          <span class="when">Octubre 2026</span>
+          <h3>Pagos en línea y billetera digital</h3>
+          <p class="items">Integración de <b>Tilopay</b> para cobrar en línea, e integración con <b>Apple Wallet y Google Wallet</b> para el pase digital.</p>
+        </div>
+      </div>
+
+      <div class="phase">
+        <div class="marker" aria-hidden="true">3</div>
+        <div class="body">
+          <span class="when">Noviembre 2026</span>
+          <h3>Reportería propia</h3>
+          <p class="items">Terminar la suite de reportes y <b>reemplazar Power BI</b> por completo.</p>
+        </div>
+      </div>
+
+      <div class="phase">
+        <div class="marker" aria-hidden="true">4</div>
+        <div class="body">
+          <span class="when">Enero 2027</span>
+          <h3>Finanzas y contabilidad</h3>
+          <p class="items">Construir el <b>módulo de finanzas / contable</b> e integrarlo con <b>QuickBooks</b>.</p>
+        </div>
+      </div>
+
+      <div class="phase">
+        <div class="marker" aria-hidden="true">5</div>
+        <div class="body">
+          <span class="when">Marzo 2027</span>
+          <h3>Módulo de empleados</h3>
+          <p class="items">Construir el <b>módulo de gestión de empleados</b>.</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
